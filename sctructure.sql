@@ -15,6 +15,8 @@ CREATE SEQUENCE film_id_seq start 1 increment 1;
 CREATE SEQUENCE scene_id_seq start 1 increment 1;
 CREATE SEQUENCE emotion_id_seq start 1 increment 1;
 CREATE SEQUENCE act_id_seq start 1 increment 1;
+CREATE SEQUENCE scenestatus_id_seq start 1 increment 1;
+CREATE SEQUENCE planning_id_seq start 1 increment 1;
 
 -- TABLES
 
@@ -91,30 +93,37 @@ INSERT INTO ACTEUR values(default,'Dwayne Johnson',2,'2003-02-02'),
 
 
 
+-- CREATE TABLE Acteurdispo(
+--     id varchar(4) primary key default nextval('acteurdispo_id_seq'),
+--     dow smallint  not null check(dow>0 and dow<8),
+--     firstHour time not null default CURRENT_TIME,
+--     lastHour time not null check(lastHour>=firstHour) default CURRENT_TIME,
+--     acteur_id varchar(4) REFERENCES Acteur(id) not null
+-- );
 CREATE TABLE Acteurdispo(
     id varchar(4) primary key default nextval('acteurdispo_id_seq'),
-    dow smallint  not null check(dow>0 and dow<8),
-    firstHour time not null default CURRENT_TIME,
-    lastHour time not null check(lastHour>=firstHour) default CURRENT_TIME,
+    notavailableDate date not null default current_date,
+    observation varchar(80),
     acteur_id varchar(4) REFERENCES Acteur(id) not null
 );
-INSERT INTO ActeurDispo VALUES(default, 1, '08:00', '12:00', 1),
-                              (default, 2, '13:00', '18:00', 1),
-                              (default, 3, '09:00', '17:00', 1),
-                              (default, 4, '10:00', '15:00', 2),
-                              (default, 5, '12:00', '16:00', 2),
-                              (default, 6, '08:00', '12:00', 3),
-                              (default, 7, '13:00', '17:00', 3),
-                              (default, 1, '08:00', '12:00', 4),
-                              (default, 2, '13:00', '18:00', 4),
-                              (default, 3, '09:00', '17:00', 4),
-                              (default, 4, '10:00', '15:00', 5),
-                              (default, 5, '12:00', '16:00', 5),
-                              (default, 6, '08:00', '12:00', 6),
-                              (default, 7, '13:00', '17:00', 6),
-                              (default, 1, '08:00', '12:00', 7),
-                              (default, 2, '13:00', '18:00', 7),
-                              (default, 3, '09:00', '17:00', 7);
+
+-- INSERT INTO ActeurDispo VALUES(default, 1, '08:00', '12:00', 1),
+--                               (default, 2, '13:00', '18:00', 1),
+--                               (default, 3, '09:00', '17:00', 1),
+--                               (default, 4, '10:00', '15:00', 2),
+--                               (default, 5, '12:00', '16:00', 2),
+--                               (default, 6, '08:00', '12:00', 3),
+--                               (default, 7, '13:00', '17:00', 3),
+--                               (default, 1, '08:00', '12:00', 4),
+--                               (default, 2, '13:00', '18:00', 4),
+--                               (default, 3, '09:00', '17:00', 4),
+--                               (default, 4, '10:00', '15:00', 5),
+--                               (default, 5, '12:00', '16:00', 5),
+--                               (default, 6, '08:00', '12:00', 6),
+--                               (default, 7, '13:00', '17:00', 6),
+--                               (default, 1, '08:00', '12:00', 7),
+--                               (default, 2, '13:00', '18:00', 7),
+--                               (default, 3, '09:00', '17:00', 7);
 
 CREATE TABLE Plateau(
     id varchar(4) primary key default nextval('plateau_id_seq'),
@@ -134,49 +143,48 @@ INSERT INTO PLATEAU VALUES
 
 CREATE TABLE Plateaudispo(
     id varchar(4) primary key default nextval('plateaudispo_id_seq'),
-    dow smallint  not null check(dow>0 and dow<8),
-    firstHour time not null default CURRENT_TIME,
-    lastHour time not null check(lastHour>=firstHour) default CURRENT_TIME,
+    notavailableDate date not null default current_date,
+    observation varchar(80),
     plateau_id varchar(4) REFERENCES Plateau(id) not null
 );
-INSERT INTO Plateaudispo VALUES
-                             (default, 1, '08:00', '18:00', 1),
-                             (default, 2, '09:00', '17:00', 1),
-                             (default, 3, '10:00', '16:00', 1),
-                             (default, 4, '12:00', '20:00', 1),
-                             (default, 5, '08:00', '18:00', 1),
-                             (default, 6, '09:00', '17:00', 1),
-                             (default, 7, '10:00', '16:00', 1),
-                             (default, 1, '08:00', '18:00', 2),
-                             (default, 2, '09:00', '17:00', 2),
-                             (default, 3, '10:00', '16:00', 2),
-                             (default, 4, '12:00', '20:00', 2),
-                             (default, 5, '08:00', '18:00', 2),
-                             (default, 6, '09:00', '17:00', 2),
-                             (default, 7, '10:00', '16:00', 2),
-                             (default, 1, '08:00', '18:00', 3),
-                             (default, 2, '09:00', '17:00', 3),
-                             (default, 3, '10:00', '16:00', 3),
-                             (default, 4, '12:00', '20:00', 3),
-                             (default, 5, '08:00', '18:00', 3),
-                             (default, 6, '09:00', '17:00', 3),
-                             (default, 7, '10:00', '16:00', 3),
-                             (default, 1, '08:00', '18:00', 4),
-                             (default, 2, '09:00', '17:00', 4),
-                             (default, 3, '10:00', '16:00', 4),
-                             (default, 4, '12:00', '20:00', 4),
-                             (default, 5, '08:00', '18:00', 4),
-                             (default, 6, '09:00', '17:00', 4),
-                             (default, 7, '10:00', '16:00', 4),
-                             (default, 1, '08:00', '18:00', 5),
-                             (default, 2, '09:00', '17:00', 5),
-                             (default, 3, '10:00', '16:00', 5),
-                             (default, 4, '12:00', '20:00', 5),
-                             (default, 5, '08:00', '18:00', 5),
-                             (default, 6, '09:00', '17:00', 5),
-                             (default, 7, '10:00', '16:00', 5),
-                             (default, 1, '08:00', '18:00', 6),
-                             (default, 2, '09:00', '17:00', 6);
+-- INSERT INTO Plateaudispo VALUES
+--                              (default, 1, '08:00', '18:00', 1),
+--                              (default, 2, '09:00', '17:00', 1),
+--                              (default, 3, '10:00', '16:00', 1),
+--                              (default, 4, '12:00', '20:00', 1),
+--                              (default, 5, '08:00', '18:00', 1),
+--                              (default, 6, '09:00', '17:00', 1),
+--                              (default, 7, '10:00', '16:00', 1),
+--                              (default, 1, '08:00', '18:00', 2),
+--                              (default, 2, '09:00', '17:00', 2),
+--                              (default, 3, '10:00', '16:00', 2),
+--                              (default, 4, '12:00', '20:00', 2),
+--                              (default, 5, '08:00', '18:00', 2),
+--                              (default, 6, '09:00', '17:00', 2),
+--                              (default, 7, '10:00', '16:00', 2),
+--                              (default, 1, '08:00', '18:00', 3),
+--                              (default, 2, '09:00', '17:00', 3),
+--                              (default, 3, '10:00', '16:00', 3),
+--                              (default, 4, '12:00', '20:00', 3),
+--                              (default, 5, '08:00', '18:00', 3),
+--                              (default, 6, '09:00', '17:00', 3),
+--                              (default, 7, '10:00', '16:00', 3),
+--                              (default, 1, '08:00', '18:00', 4),
+--                              (default, 2, '09:00', '17:00', 4),
+--                              (default, 3, '10:00', '16:00', 4),
+--                              (default, 4, '12:00', '20:00', 4),
+--                              (default, 5, '08:00', '18:00', 4),
+--                              (default, 6, '09:00', '17:00', 4),
+--                              (default, 7, '10:00', '16:00', 4),
+--                              (default, 1, '08:00', '18:00', 5),
+--                              (default, 2, '09:00', '17:00', 5),
+--                              (default, 3, '10:00', '16:00', 5),
+--                              (default, 4, '12:00', '20:00', 5),
+--                              (default, 5, '08:00', '18:00', 5),
+--                              (default, 6, '09:00', '17:00', 5),
+--                              (default, 7, '10:00', '16:00', 5),
+--                              (default, 1, '08:00', '18:00', 6),
+--                              (default, 2, '09:00', '17:00', 6);
 CREATE TABLE Film(
     id varchar(4) primary key default nextval('film_id_seq'),
     title varchar(80) not null,
@@ -194,19 +202,33 @@ INSERT INTO FILM values (default,'Fast and furious','Un film d action hors norme
                         (default, 'Pulp Fiction', 'The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',2, 35.00,'2023-03-28'),
                         (default, 'Forrest Gump', 'The presidencies of Kennedy and Johnson, the events of Vietnam, Watergate and other historical events unfold through the perspective of an Alabama man with an IQ of 75.',4, 45.00,'2023-03-24');
 
+CREATE TABLE SceneStatus (
+    id varchar(4) primary key default nextval('scenestatus_id_seq'),
+    status varchar(80) unique not null,
+    value smallint unique not null
+);
+
+-- ! mila atao en cours aloha ilay status an'ilay scène vao afaka mi-créer action
+-- ! rehefa achevé ilay écriture dia tsy afaka mi-créer action intsony ao amin'ilay scène
+
+INSERT INTO SceneStatus VALUES 
+(1,'créé',0), 
+(2,'écriture en cours',8),
+(3,'écriture achevé',20);
 
 CREATE TABLE Scene(
     id varchar(4) primary key default nextval('scene_id_seq'),
     film_id varchar(4) REFERENCES Film(id) not null,
     plateau_id varchar(4) REFERENCES Plateau(id) not null,
-    description TEXT
+    description TEXT,
+    scenestatus_id varchar(4) REFERENCES SceneStatus(id) default 1 not null 
 );
-INSERT INTO Scene (id, film_id, plateau_id, description)
-VALUES (1, 1, 2, 'Opening Scene'),
-       (2, 1, 1, 'Action Scene'),
-       (3, 2, 3, 'Dramatic Scene'),
-       (4, 2, 2, 'Romantic Scene'),
-       (5, 3, 1, 'Comedy Scene');
+INSERT INTO Scene (id, film_id, plateau_id, description,scenestatus_id)
+VALUES (1, 1, 2, 'Opening Scene',2),
+       (2, 1, 1, 'Action Scene',2),
+       (3, 2, 3, 'Dramatic Scene',1),
+       (4, 2, 2, 'Romantic Scene',1),
+       (5, 3, 1, 'Comedy Scene',1);
 
 -- duration in minute
 CREATE TABLE Act(
@@ -221,9 +243,46 @@ CREATE TABLE Act(
     emotion_id varchar(4) REFERENCES Emotion(id),
     act_id varchar(4) REFERENCES Act(id)
 );
+
+
 INSERT INTO Act (id, acttype_id, scene_id, acteur_id, firstHour , lastHour,duration, action, emotion_id,act_id)
 VALUES
     (1, 2, 1, 3, '08:00:00', '08:30:00',2, 'Enters the room', 2,null),
     (2, 1, 1, 1, null,null ,default,  'Greets the guests', 1,1),
     (3, 2, 1, 4, null,null,2, 'Pours a drink', 3,2),
     (4, 3, 2, 2, '09:00:00','11:30:00',20, 'Fights with the antagonist', 4,null);
+
+CREATE TABLE Planning (
+    id varchar(4) primary key default nextval('planning_id_seq'),
+    planningdate timestamp not null,
+    act_id varchar(4) REFERENCES Act(id) not null
+);
+
+
+
+-- Vue pour le status des scènes avec planifié ou non
+
+CREATE OR REPLACE VIEW v_scenestatus_tmp AS
+SELECT s.id scene_id,s.scenestatus_id,COALESCE(count(a.id),0) actions_number from 
+Scene s left join Act a on s.id=a.scene_id
+group by s.id , s.scenestatus_id;
+
+
+CREATE OR REPLACE VIEW v_scenestatus_tmp2 AS
+SELECT s.scene_id,s.scenestatus_id,s.actions_number,COALESCE(count(p.id),0) planning_actionsNumber from  
+Planning p left join Act a on  p.act_id = a.id left join Scene sp on a.scene_id = sp.id
+right join v_scenestatus_tmp s on sp.Id = s.scene_id 
+group by s.scene_id,s.scenestatus_id,s.actions_number;
+
+CREATE OR REPLACE VIEW v_scenestatus AS
+SELECT s.scene_id,case 
+  when s.actions_number!=0 and s.actions_number=planning_actionsnumber then 
+  'plannifié'
+  else st.status 
+end status,case 
+  when s.actions_number!=0 and s.actions_number=planning_actionsnumber then 
+  30
+  else st.value
+end value
+from
+v_scenestatus_tmp2 s join SceneStatus st on s.scenestatus_id = st.id;

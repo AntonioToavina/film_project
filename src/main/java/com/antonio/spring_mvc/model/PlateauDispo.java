@@ -10,7 +10,7 @@ public class PlateauDispo {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "pk_plateaudispo_id_seq")
     @SequenceGenerator(name = "pk_plateaudispo_id_seq",sequenceName = " plateaudispo_id_seq",allocationSize = 1)
-    private String id;
+    private int id;
 
     int dow;
 
@@ -54,11 +54,11 @@ public class PlateauDispo {
         this.plateau = plateau;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 }

@@ -9,7 +9,7 @@ public class Emotion {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "pk_emotion_id_seq")
     @SequenceGenerator(name = "pk_emotion_id_seq",sequenceName = "emotion_id_seq",allocationSize = 1)
-    private String id;
+    private int id;
 
     String emotionname;
 
@@ -21,11 +21,11 @@ public class Emotion {
         this.emotionname = emotionname;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 }

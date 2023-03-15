@@ -24,8 +24,8 @@
               <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
                 Landing Pages
               </h6>
-              <a href="/logout" class="dropdown-item border-radius-md">
-                <span>Films</span>
+              <a href="/to_listesActeurs" class="dropdown-item border-radius-md">
+                <span>Acteurs</span>
               </a>
 
             </div>

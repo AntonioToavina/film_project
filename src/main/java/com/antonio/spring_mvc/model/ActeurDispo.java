@@ -9,7 +9,7 @@ public class ActeurDispo {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "pk_acteurdispo_id_seq")
     @SequenceGenerator(name = "pk_acteurdispo_id_seq",sequenceName = "acteurdispo_id_seq",allocationSize = 1)
-    private String id;
+    private int id;
 
     int dow;
 
@@ -54,11 +54,11 @@ public class ActeurDispo {
         this.acteur = acteur;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 }

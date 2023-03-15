@@ -1,15 +1,26 @@
 package com.antonio.spring_mvc.model;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "scene")
+@DynamicInsert
 public class Scene {
+
+    public Scene(){}
+
+    public Scene(Film film, Plateau plateau, String description) {
+        this.film = film;
+        this.plateau = plateau;
+        this.description = description;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "pk_scene_id_seq")
     @SequenceGenerator(name = "pk_scene_id_seq",sequenceName = "scene_id_seq",allocationSize = 1)
-    private String id;
+    private int id;
 
     @ManyToOne(targetEntity = Film.class,fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "film_id", referencedColumnName = "id")
@@ -20,6 +31,18 @@ public class Scene {
     Plateau plateau;
 
     String description;
+
+    @OneToOne
+    @JoinColumn(name = "scenestatus_id",referencedColumnName = "id")
+    Scenestatus scenestatus;
+
+    public Scenestatus getScenestatus() {
+        return scenestatus;
+    }
+
+    public void setScenestatus(Scenestatus scenestatus) {
+        this.scenestatus = scenestatus;
+    }
 
     public Film getFilm() {
         return film;
@@ -45,11 +68,11 @@ public class Scene {
         this.description = description;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

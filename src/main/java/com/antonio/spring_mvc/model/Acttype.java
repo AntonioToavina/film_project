@@ -9,7 +9,7 @@ public class Acttype {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "pk_acttype_id_seq")
     @SequenceGenerator(name = "pk_acttype_id_seq",sequenceName = "acttype_id_seq",allocationSize = 1)
-    private String id;
+    private int id;
 
     String typename;
 
@@ -21,11 +21,11 @@ public class Acttype {
         this.typename = typename;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 }

@@ -3,25 +3,25 @@
 
 -- SEQUENCE
 
-CREATE SEQUENCE gender_id_seq start 1 increment 1;
-CREATE SEQUENCE filmcgt_id_seq start 1 increment 1;
-CREATE SEQUENCE acttype_id_seq start 1 increment 1;
-CREATE SEQUENCE plateauctg_id_seq start 1 increment 1;
-CREATE SEQUENCE acteur_id_seq start 1 increment 1;
-CREATE SEQUENCE acteurdispo_id_seq start 1 increment 1;
-CREATE SEQUENCE plateau_id_seq start 1 increment 1;
-CREATE SEQUENCE plateaudispo_id_seq start 1 increment 1;
-CREATE SEQUENCE film_id_seq start 1 increment 1;
-CREATE SEQUENCE scene_id_seq start 1 increment 1;
-CREATE SEQUENCE emotion_id_seq start 1 increment 1;
-CREATE SEQUENCE act_id_seq start 1 increment 1;
-CREATE SEQUENCE scenestatus_id_seq start 1 increment 1;
-CREATE SEQUENCE planning_id_seq start 1 increment 1;
+    CREATE SEQUENCE gender_id_seq start 1 increment 1;
+    CREATE SEQUENCE filmcgt_id_seq start 1 increment 1;
+    CREATE SEQUENCE acttype_id_seq start 1 increment 1;
+    CREATE SEQUENCE plateauctg_id_seq start 1 increment 1;
+    CREATE SEQUENCE acteur_id_seq start 1 increment 1;
+    CREATE SEQUENCE acteurdispo_id_seq start 1 increment 1;
+    CREATE SEQUENCE plateau_id_seq start 1 increment 1;
+    CREATE SEQUENCE plateaudispo_id_seq start 1 increment 1;
+    CREATE SEQUENCE film_id_seq start 1 increment 1;
+    CREATE SEQUENCE scene_id_seq start 1 increment 1;
+    CREATE SEQUENCE emotion_id_seq start 1 increment 1;
+    CREATE SEQUENCE act_id_seq start 1 increment 1;
+    CREATE SEQUENCE scenestatus_id_seq start 1 increment 1;
+    CREATE SEQUENCE planning_id_seq start 1 increment 1;
 
 -- TABLES
 
 CREATE TABLE Gender(
-    id varchar(4) primary key default nextval('gender_id_seq'),
+    id integer primary key default nextval('gender_id_seq'),
     gendername varchar(80) unique not null
 );
 INSERT INTO Gender (gendername) VALUES
@@ -31,7 +31,7 @@ INSERT INTO Gender (gendername) VALUES
                                     ('Autre');
 
 CREATE TABLE Emotion(
-    id varchar(4) primary key default nextval('emotion_id_seq'),
+    id integer primary key default nextval('emotion_id_seq'),
     emotionname varchar(80) unique not null
 );
 INSERT INTO Emotion (emotionname) VALUES
@@ -48,7 +48,7 @@ INSERT INTO Emotion (emotionname) VALUES
 
 
 CREATE TABLE Filmctg(
-    id varchar(4) primary key default nextval('filmcgt_id_seq'),
+    id integer primary key default nextval('filmcgt_id_seq'),
     ctgname varchar(80) unique not null
 );
 INSERT INTO Filmctg (ctgname) VALUES
@@ -62,7 +62,7 @@ INSERT INTO Filmctg (ctgname) VALUES
                                   ('Documentary');
 
 CREATE TABLE Acttype(
-    id varchar(4) primary key default nextval('acttype_id_seq'),
+    id integer primary key default nextval('acttype_id_seq'),
     typename varchar(80) unique not null
 );
 INSERT INTO Acttype values (default,'discussion'),
@@ -70,7 +70,7 @@ INSERT INTO Acttype values (default,'discussion'),
                            (default,'observation');
 
 CREATE TABLE Plateauctg(
-    id varchar(4) primary key default nextval('plateauctg_id_seq'),
+    id integer primary key default nextval('plateauctg_id_seq'),
     ctgname varchar(80) unique not null
 );
 INSERT INTO Plateauctg values (default,'exterieur'),
@@ -78,9 +78,9 @@ INSERT INTO Plateauctg values (default,'exterieur'),
 
 
 CREATE TABLE Acteur(
-    id varchar(4) primary key default nextval('acteur_id_seq'),
+    id integer primary key default nextval('acteur_id_seq'),
     nom_acteur varchar(80) not null,
-    gender_id varchar(4) REFERENCES Gender(id) not null,
+    gender_id integer REFERENCES Gender(id) not null,
     birthday date not null check(birthday<current_date)
 );
 INSERT INTO ACTEUR values(default,'Dwayne Johnson',2,'2003-02-02'),
@@ -101,10 +101,10 @@ INSERT INTO ACTEUR values(default,'Dwayne Johnson',2,'2003-02-02'),
 --     acteur_id varchar(4) REFERENCES Acteur(id) not null
 -- );
 CREATE TABLE Acteurdispo(
-    id varchar(4) primary key default nextval('acteurdispo_id_seq'),
+    id integer primary key default nextval('acteurdispo_id_seq'),
     notavailableDate date not null default current_date,
     observation varchar(80),
-    acteur_id varchar(4) REFERENCES Acteur(id) not null
+    acteur_id integer REFERENCES Acteur(id) not null
 );
 
 -- INSERT INTO ActeurDispo VALUES(default, 1, '08:00', '12:00', 1),
@@ -126,11 +126,11 @@ CREATE TABLE Acteurdispo(
 --                               (default, 3, '09:00', '17:00', 7);
 
 CREATE TABLE Plateau(
-    id varchar(4) primary key default nextval('plateau_id_seq'),
+    id integer primary key default nextval('plateau_id_seq'),
     location varchar(80),
     description varchar(150),
     price double precision not null default 0 check(price>0), 
-    plateauctg_id varchar(4) REFERENCES Plateauctg(id) not null
+    plateauctg_id integer REFERENCES Plateauctg(id) not null
 );
 INSERT INTO PLATEAU VALUES
                         (default, 'Studios Paramount', 'Plateau de tournage pour les productions Paramount', 1500,1),
@@ -142,10 +142,10 @@ INSERT INTO PLATEAU VALUES
                         (default, 'Babelsberg Studio', 'Plateau de tournage pour les productions Babelsberg', 1900,2);
 
 CREATE TABLE Plateaudispo(
-    id varchar(4) primary key default nextval('plateaudispo_id_seq'),
+    id integer primary key default nextval('plateaudispo_id_seq'),
     notavailableDate date not null default current_date,
     observation varchar(80),
-    plateau_id varchar(4) REFERENCES Plateau(id) not null
+    plateau_id integer REFERENCES Plateau(id) not null
 );
 -- INSERT INTO Plateaudispo VALUES
 --                              (default, 1, '08:00', '18:00', 1),
@@ -186,10 +186,10 @@ CREATE TABLE Plateaudispo(
 --                              (default, 1, '08:00', '18:00', 6),
 --                              (default, 2, '09:00', '17:00', 6);
 CREATE TABLE Film(
-    id varchar(4) primary key default nextval('film_id_seq'),
+    id integer primary key default nextval('film_id_seq'),
     title varchar(80) not null,
     description text,
-    filmctg_id varchar(4) REFERENCES Filmctg(id) not null,
+    filmctg_id integer REFERENCES Filmctg(id) not null,
     fond double precision not null default 0 check(fond>0),
     production_date date not null
 );
@@ -203,7 +203,7 @@ INSERT INTO FILM values (default,'Fast and furious','Un film d action hors norme
                         (default, 'Forrest Gump', 'The presidencies of Kennedy and Johnson, the events of Vietnam, Watergate and other historical events unfold through the perspective of an Alabama man with an IQ of 75.',4, 45.00,'2023-03-24');
 
 CREATE TABLE SceneStatus (
-    id varchar(4) primary key default nextval('scenestatus_id_seq'),
+    id integer primary key default nextval('scenestatus_id_seq'),
     status varchar(80) unique not null,
     value smallint unique not null
 );
@@ -217,11 +217,11 @@ INSERT INTO SceneStatus VALUES
 (3,'écriture achevé',20);
 
 CREATE TABLE Scene(
-    id varchar(4) primary key default nextval('scene_id_seq'),
-    film_id varchar(4) REFERENCES Film(id) not null,
-    plateau_id varchar(4) REFERENCES Plateau(id) not null,
+    id integer primary key default nextval('scene_id_seq'),
+    film_id integer REFERENCES Film(id) not null,
+    plateau_id integer REFERENCES Plateau(id) not null,
     description TEXT,
-    scenestatus_id varchar(4) REFERENCES SceneStatus(id) default 1 not null 
+    scenestatus_id integer REFERENCES SceneStatus(id) default 1 not null
 );
 INSERT INTO Scene (id, film_id, plateau_id, description,scenestatus_id)
 VALUES (1, 1, 2, 'Opening Scene',2),
@@ -232,16 +232,16 @@ VALUES (1, 1, 2, 'Opening Scene',2),
 
 -- duration in minute
 CREATE TABLE Act(
-    id varchar(4) primary key default nextval('act_id_seq'),
-    acttype_id varchar(4) REFERENCES Acttype(id) not null,
-    scene_id varchar(4) REFERENCES Scene(id) not null,
-    acteur_id varchar(4) REFERENCES Acteur(id),
+    id integer primary key default nextval('act_id_seq'),
+    acttype_id integer REFERENCES Acttype(id) not null,
+    scene_id integer REFERENCES Scene(id) not null,
+    acteur_id integer REFERENCES Acteur(id),
     firstHour time,
     lastHour time,
     duration integer not null check(duration>0) default 1,
     action TEXT NOT NULL,
-    emotion_id varchar(4) REFERENCES Emotion(id),
-    act_id varchar(4) REFERENCES Act(id)
+    emotion_id integer REFERENCES Emotion(id),
+    act_id integer REFERENCES Act(id)
 );
 
 
@@ -253,9 +253,9 @@ VALUES
     (4, 3, 2, 2, '09:00:00','11:30:00',20, 'Fights with the antagonist', 4,null);
 
 CREATE TABLE Planning (
-    id varchar(4) primary key default nextval('planning_id_seq'),
+    id integer primary key default nextval('planning_id_seq'),
     planningdate timestamp not null,
-    act_id varchar(4) REFERENCES Act(id) not null
+    act_id integer REFERENCES Act(id) not null
 );
 
 

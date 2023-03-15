@@ -53,9 +53,8 @@ public class Utility {
             List<Criterion> criterions=new ArrayList<>();
             for (FieldUtil field : fields) {
                 if(field.getValue()!=null){
-                    if(field.getValue().getClass().equals(Integer.class)){
-                        int val=Integer.parseInt(field.getValue().toString());
-                        if(val==0)
+                    if(field.getValue().getClass().equals(Integer.class) || field.getValue().getClass().equals(Double.class)){
+                        if(field.getValue().toString().equals("0") || field.getValue().toString().equals("0.0"))
                             continue;
                     }
                     Criterion c= Restrictions.eq(field.getFieldName(),field.getValue());
@@ -67,7 +66,6 @@ public class Utility {
                 }
             }
             setCriteria(criteria,criterions,logical_operation);
-
         } catch (Exception ex) {
             throw ex;
         }

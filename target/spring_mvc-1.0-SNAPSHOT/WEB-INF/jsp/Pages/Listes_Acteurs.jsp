@@ -23,7 +23,7 @@
 
                             <c:forEach items="${acteurs}" var="acteur">
                                 <tr>
-                                    <td>${acteur.id}</td>
+                                    <td><a href="/acteurs/${acteur.id}/to_addIndisponibilite">${acteur.id}</a></td>
                                     <td>${acteur.nom_acteur}</td>
                                     <td>${acteur.gender.gendername}</td>
                                     <td>${Utility.formatDate(acteur.birthday)}</td>
@@ -31,6 +31,24 @@
                             </c:forEach>
                             </tbody>
                         </table>
+                    </div>
+                    <div style="margin-top: 50px;margin-left: 300px">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="/to_listesActeurs/nextpage?increment=-1" aria-label="Previous">
+                                        <span aria-hidden="true"><<</span>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="/to_listesActeurs/nextpage?increment=0">${currPage}</a></li>
+                                <li class="page-item active"><a class="page-link" href="/to_listesActeurs/nextpage?increment=1">${currPage+1}</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="/to_listesActeurs/nextpage?increment=1">
+                                        <span aria-hidden="true">>></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>

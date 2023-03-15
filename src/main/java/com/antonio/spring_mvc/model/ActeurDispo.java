@@ -1,6 +1,7 @@
 package com.antonio.spring_mvc.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Time;
 
 @Entity
@@ -11,39 +12,29 @@ public class ActeurDispo {
     @SequenceGenerator(name = "pk_acteurdispo_id_seq",sequenceName = "acteurdispo_id_seq",allocationSize = 1)
     private int id;
 
-    int dow;
+    Date notavailabledate;
 
-    Time firsthour;
+    String observation;
 
-    Time lasthour;
 
     @ManyToOne(targetEntity = Acteur.class,fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "acteur_id", referencedColumnName = "id")
     Acteur acteur;
 
-
-    public int getDow() {
-        return dow;
+    public Date getNotavailabledate() {
+        return notavailabledate;
     }
 
-    public void setDow(int dow) {
-        this.dow = dow;
+    public void setNotavailabledate(Date notavailabledate) {
+        this.notavailabledate = notavailabledate;
     }
 
-    public Time getFirsthour() {
-        return firsthour;
+    public String getObservation() {
+        return observation;
     }
 
-    public void setFirsthour(Time firsthour) {
-        this.firsthour = firsthour;
-    }
-
-    public Time getLasthour() {
-        return lasthour;
-    }
-
-    public void setLasthour(Time lasthour) {
-        this.lasthour = lasthour;
+    public void setObservation(String observation) {
+        this.observation = observation;
     }
 
     public Acteur getActeur() {

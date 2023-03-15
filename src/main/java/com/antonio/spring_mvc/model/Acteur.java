@@ -19,6 +19,7 @@ public class Acteur {
     Gender gender;
     Date birthday;
 
+
     public String getNom_acteur() {
         return nom_acteur;
     }

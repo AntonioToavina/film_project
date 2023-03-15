@@ -258,6 +258,13 @@ CREATE TABLE Planning (
     act_id integer REFERENCES Act(id) not null
 );
 
+CREATE TABLE Limitpage(
+    id serial primary key,
+    valeur smallint not null default 5
+);
+
+INSERT INTO limitpage(valeur) values(5);
+
 
 
 -- Vue pour le status des scènes avec planifié ou non

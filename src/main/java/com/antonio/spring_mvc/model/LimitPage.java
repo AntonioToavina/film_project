@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class LimitPage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idlimit;
+    private Integer id;
 
     int valeur;
 
@@ -19,11 +19,11 @@ public class LimitPage {
         this.valeur = valeur;
     }
 
-    public void setIdlimit(Integer idlimit) {
-        this.idlimit = idlimit;
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getIdlimit() {
-        return idlimit;
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

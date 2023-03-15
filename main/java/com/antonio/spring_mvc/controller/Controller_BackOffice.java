@@ -21,8 +21,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.List;
 
-@Controller
+
 public class Controller_BackOffice {
+
     /*
     @Autowired
     HibernateDAO dao;

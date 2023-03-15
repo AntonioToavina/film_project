@@ -66,7 +66,6 @@ public class HibernateDAO implements InterfaceDAO{
         for(Iterator iterator = list.iterator(); iterator.hasNext();){
             array.add(iterator.next());
         }
-
         return array;
     }
 
@@ -79,8 +78,11 @@ public class HibernateDAO implements InterfaceDAO{
         try{
             openConnection();
             Criteria cr=this.session.createCriteria(obj.getClass());
+            System.out.println("atooo");
+            System.out.println(cr.list().size());
             results=cr.list();
         }catch(Exception e ){
+            e.printStackTrace();
             if (this.transaction != null) {
                 this.transaction.rollback();
             }

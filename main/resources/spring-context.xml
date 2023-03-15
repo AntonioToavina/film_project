@@ -6,7 +6,7 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
         <property name="driverClassName" value="org.postgresql.Driver" />
-        <property name="url" value="jdbc:postgresql://localhost:5432/tp" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/film" />
         <property name="username" value="antonio" />
         <property name="password" value="antonio" />
     </bean>
@@ -30,10 +30,7 @@
     <bean id="hibernateDAO" class="com.antonio.spring_mvc.DAO.HibernateDAO">
         <property name="factory" ref="sessionFactory" />
     </bean>
-    <bean id="communeController" class="com.antonio.spring_mvc.controller.Controller_BackOffice">
-        <property name="dao" ref="hibernateDAO" />
-    </bean>
-    <bean id="communeController" class="com.antonio.spring_mvc.controller.Controller_FrontOffice">
+    <bean id="ctlmain" class="com.antonio.spring_mvc.controller.Controller_Main">
         <property name="dao" ref="hibernateDAO" />
     </bean>
 </beans>

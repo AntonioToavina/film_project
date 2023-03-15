@@ -3,7 +3,7 @@ package com.antonio.spring_mvc.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "film")
+@Table(name = "filmctg")
 public class Filmctg {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "px_filmcgt_id_seq")

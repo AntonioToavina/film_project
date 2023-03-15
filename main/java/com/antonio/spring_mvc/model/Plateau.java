@@ -11,14 +11,46 @@ public class Plateau {
     @SequenceGenerator(name="pk_plateau_id_seq" ,sequenceName = "plateau_id_seq",allocationSize = 1)
     private String id;
 
-    String ctgname;
+    String location;
 
-    public String getCtgname() {
-        return ctgname;
+    String description;
+
+    double price;
+
+    @OneToOne
+    @JoinColumn(name = "plateauctg_id",referencedColumnName = "id")
+    Plateauctg plateauctg;
+
+    public String getLocation() {
+        return location;
     }
 
-    public void setCtgname(String ctgname) {
-        this.ctgname = ctgname;
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Plateauctg getPlateauctg() {
+        return plateauctg;
+    }
+
+    public void setPlateauctg(Plateauctg plateauctg) {
+        this.plateauctg = plateauctg;
     }
 
     public void setId(String id) {

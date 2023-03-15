@@ -16,7 +16,7 @@
         <li class="nav-item dropdown dropdown-hover mx-2 ms-lg-5">
           <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" id="dropdownMenuPages5" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="material-icons opacity-6 me-2 text-md">dashboard</i>
-            Pages
+            Listes
             <img src="${pageContext.request.contextPath}/resources/theme/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
           </a>
           <div class="dropdown-menu ms-n3 dropdown-menu-animation dropdown-md p-3 border-radius-lg mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages5">
@@ -25,9 +25,26 @@
                 Landing Pages
               </h6>
               <a href="/logout" class="dropdown-item border-radius-md">
-                <span>Logout</span>
+                <span>Films</span>
               </a>
 
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown dropdown-hover mx-2 ms-lg-5">
+          <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" id="dropdownMenuPages5" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="material-icons opacity-6 me-2 text-md">dashboard</i>
+            Creation
+            <img src="${pageContext.request.contextPath}/resources/theme/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
+          </a>
+          <div class="dropdown-menu ms-n3 dropdown-menu-animation dropdown-md p-3 border-radius-lg mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages5">
+            <div class="d-none d-lg-block">
+              <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+                Landing Pages
+              </h6>
+              <a href="/index" class="dropdown-item border-radius-md">
+                <span>Scene</span>
+              </a>
             </div>
           </div>
         </li>

@@ -78,8 +78,6 @@ public class HibernateDAO implements InterfaceDAO{
         try{
             openConnection();
             Criteria cr=this.session.createCriteria(obj.getClass());
-            System.out.println("atooo");
-            System.out.println(cr.list().size());
             results=cr.list();
         }catch(Exception e ){
             e.printStackTrace();
@@ -89,7 +87,6 @@ public class HibernateDAO implements InterfaceDAO{
         }finally{
             closeSession();
         }
-        System.out.println(results.size());
         return results;
     }
 
@@ -157,8 +154,6 @@ public class HibernateDAO implements InterfaceDAO{
             Criteria criteria=session.createCriteria(o.getClass());
             Utility.createCriterion(o,criteria,"and");
             if(!all){
-                System.out.println("Start="+Pagination.start);
-                System.out.println("Limit="+Pagination.limit);
                 criteria.setFirstResult(start);
                 criteria.setMaxResults(limit);
             }

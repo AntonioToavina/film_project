@@ -8,7 +8,7 @@ public class Filmctg {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "px_filmcgt_id_seq")
     @SequenceGenerator(name="pkfilmcgt_id_seq" ,sequenceName = "filmcgt_id_seq",allocationSize = 1)
-    private String id;
+    private int id;
 
     String ctgname;
 
@@ -20,11 +20,11 @@ public class Filmctg {
         this.ctgname = ctgname;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 }

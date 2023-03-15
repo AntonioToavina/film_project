@@ -10,17 +10,17 @@ public class Acteur {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "pk_acteur_id_seq")
     @SequenceGenerator(name="pk_acteur_id_seq" ,sequenceName = "acteur_id_seq",allocationSize = 1)
-    private String id;
+    private int id;
 
-    String nom;
+    String nom_acteur;
 
     @OneToOne
     @JoinColumn(name = "gender_id",referencedColumnName = "id")
     Gender gender;
     Date birthday;
 
-    public String getNom() {
-        return nom;
+    public String getNom_acteur() {
+        return nom_acteur;
     }
 
     public Gender getGender() {
@@ -39,15 +39,15 @@ public class Acteur {
         this.birthday = birthday;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNom_acteur(String nom) {
+        this.nom_acteur = nom;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 }

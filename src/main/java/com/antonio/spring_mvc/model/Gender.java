@@ -6,8 +6,9 @@ import javax.persistence.*;
 @Table(name = "gender")
 public class Gender {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "pk_gender_id_seq'")
+    @SequenceGenerator(name="pk_gender_id_seq'" ,sequenceName = "gender_id_seq'",allocationSize = 1)
+    private int id;
 
     String gendername;
 
@@ -19,11 +20,11 @@ public class Gender {
         this.gendername = gendername;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 }

@@ -9,7 +9,7 @@ public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "px_film_id_seq")
     @SequenceGenerator(name="pk_film_id_seq" ,sequenceName = "film_id_seq",allocationSize = 1)
-    private String id;
+    private int id;
 
     String title;
     String description;
@@ -61,11 +61,11 @@ public class Film {
         this.fond = fond;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 }

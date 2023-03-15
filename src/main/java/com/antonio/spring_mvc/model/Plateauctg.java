@@ -8,7 +8,7 @@ public class Plateauctg {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "pk_plateauctg_id_seq")
     @SequenceGenerator(name="pk_plateauctg_id_seq" ,sequenceName = "plateauctg_id_seq",allocationSize = 1)
-    private String id;
+    private int id;
 
     String ctgname;
 
@@ -20,11 +20,11 @@ public class Plateauctg {
         this.ctgname = ctgname;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 }

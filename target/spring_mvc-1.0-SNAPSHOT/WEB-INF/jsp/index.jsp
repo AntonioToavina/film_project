@@ -12,7 +12,7 @@
                         <div class="mb-4">
                             <label class="form-label">Film</label>
                             <div class="input-group input-group-dynamic">
-                                <select name="film_id" class="form-control" >
+                                <select name="film_id" class="form-control">
                                     <c:forEach items="${films}" var="film">
                                         <option value="${film.id}">${film.title}</option>
                                     </c:forEach>
@@ -30,8 +30,8 @@
                             </div>
                         </div>
                         <div class="mb-4">
+                            <label class="form-label">Description</label>
                             <div class="input-group input-group-dynamic">
-                                <label class="form-label">Description</label>
                                 <textarea name="description" class="form-control" id="message" rows="4"></textarea>
                             </div>
                         </div>

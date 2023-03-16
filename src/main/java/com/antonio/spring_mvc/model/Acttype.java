@@ -3,7 +3,7 @@ package com.antonio.spring_mvc.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "actype")
+@Table(name = "acttype")
 public class Acttype {
 
     @Id

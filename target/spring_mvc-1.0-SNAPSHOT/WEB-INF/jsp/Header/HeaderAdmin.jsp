@@ -26,7 +26,7 @@
               <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
                 Planning
               </h6>
-              <a href="/to_listesActeurs" class="dropdown-item border-radius-md">
+              <a href="/planning/suggest_form" class="dropdown-item border-radius-md">
                 <span>Suggestion</span>
               </a>
               <a href="/to_listesActeurs" class="dropdown-item border-radius-md">

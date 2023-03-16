@@ -15,10 +15,12 @@ public class Acteur_Service {
         acteurDispo.setActeur(acteur);
 
         List<Object> list=dao.find(acteurDispo,true,0,0);
-        ActeurDispo[] listDisponibility=new ActeurDispo[list.size()];
-
-        for(int i=0;i<listDisponibility.length;i++){
-            listDisponibility[i]=(ActeurDispo) list.get(i);
+        ActeurDispo[] listDisponibility=new ActeurDispo[0];
+        if(list!=null){
+            listDisponibility=new ActeurDispo[list.size()];
+            for(int i=0;i<listDisponibility.length;i++){
+                listDisponibility[i]=(ActeurDispo) list.get(i);
+            }
         }
 
         return listDisponibility;
@@ -32,7 +34,8 @@ public class Acteur_Service {
         acteur=(Acteur) dao.find(acteur,true,0,0).get(0);
         acteurDispo.setActeur(acteur);
         acteurDispo.setNotavailabledate(notavailabledate);
-        acteurDispo.setObservation(observation);
+        if(observation!=null)
+            acteurDispo.setObservation(observation);
 
         dao.save(acteurDispo);
     }

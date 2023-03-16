@@ -1,6 +1,7 @@
 <jsp:include page="Header/Header.jsp" />
 <jsp:include page="Header/HeaderAdmin.jsp" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <body>
 <section>
     <div class="container py-4">

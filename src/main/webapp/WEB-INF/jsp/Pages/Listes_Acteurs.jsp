@@ -2,6 +2,7 @@
 <jsp:include page="../Header/Header.jsp" />
 <jsp:include page="../Header/HeaderAdmin.jsp" />
 <%@page import="com.antonio.spring_mvc.Service.Utility" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <body>
 <section>
     <div class="container py-4">

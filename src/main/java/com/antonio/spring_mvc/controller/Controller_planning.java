@@ -29,4 +29,8 @@ public class Controller_planning {
     public String toForm(Model model){
         return "Pages/Planning/form";
     }
+    @GetMapping("suggest_list")
+    public String toList(Model model){
+        return "Pages/Planning/list";
+    }
 }

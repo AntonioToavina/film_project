@@ -29,7 +29,7 @@
               <a href="/planning/suggest_form" class="dropdown-item border-radius-md">
                 <span>Suggestion</span>
               </a>
-              <a href="/to_listesActeurs" class="dropdown-item border-radius-md">
+              <a href="/planning/suggest_list" class="dropdown-item border-radius-md">
                 <span>Planning</span>
               </a>
 
@@ -39,7 +39,7 @@
 
         <li class="nav-item dropdown dropdown-hover mx-2 ms-lg-5">
           <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" id="dropdownMenuPages2" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="material-icons opacity-6 me-2 text-md">dashboard</i>
+            <i class="material-icons opacity-6 me-2 text-md">list</i>
             Listes
             <img src="${pageContext.request.contextPath}/resources/theme/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
           </a>
@@ -57,7 +57,7 @@
         </li>
         <li class="nav-item dropdown dropdown-hover mx-2 ms-lg-5">
           <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" id="dropdownMenuPages3" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="material-icons opacity-6 me-2 text-md">dashboard</i>
+            <i class="material-icons opacity-6 me-2 text-md">add</i>
             Création
             <img src="${pageContext.request.contextPath}/resources/theme/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
           </a>

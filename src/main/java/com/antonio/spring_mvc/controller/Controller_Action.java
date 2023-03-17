@@ -2,6 +2,7 @@ package com.antonio.spring_mvc.controller;
 
 import com.antonio.spring_mvc.DAO.HibernateDAO;
 import com.antonio.spring_mvc.model.*;
+import com.antonio.spring_mvc.model.Act;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,7 @@ public class Controller_Action {
         model.addAttribute("scenes",dao.findAll(new Scene()));
         model.addAttribute("acteurs",dao.findAll(new Acteur()));
         model.addAttribute("emotions",dao.findAll(new Emotion()));
-        model.addAttribute("actions",dao.findAll(new Act()));
+
         return "Pages/creation-action";
     }
 
@@ -38,7 +39,8 @@ public class Controller_Action {
         Emotion em = new Emotion();
         em.setId(emotion);
 
-        Act act = new Act();
+        Act act;
+        act = new Act();
         act.setFirsthour(java.sql.Time.valueOf(debut+":00"));
         act.setLasthour(java.sql.Time.valueOf(fin+":00"));
         act.setDuration(duree);
@@ -50,7 +52,7 @@ public class Controller_Action {
         act.setActtype_id((Acttype) dao.findById(type));
 
         dao.save(act);
-        return "";
+        return "vide";
     }
 
     public HibernateDAO getDao() {

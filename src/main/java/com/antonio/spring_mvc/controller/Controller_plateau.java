@@ -7,10 +7,9 @@ import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -23,7 +22,20 @@ public class Controller_plateau {
         model.addAttribute("plateaux",dao.findAll(new Plateau()));
         return "Pages/liste-plateau";
     }
+    @PostMapping("/invalid-plateau")
+    public String to_insertAction(@RequestParam() int plateau,@RequestParam() Date date, @RequestParam() String observation,Model model) {
+        Plateau ref = new Plateau();
+        ref.setId(plateau);
 
+        PlateauDispo dispo = new PlateauDispo();
+        dispo.setPlateau((Plateau) dao.findById(ref));
+        dispo.setObservation(observation);
+        dispo.setNotavailabledate(date);
+
+        dao.save(dispo);
+        model.addAttribute("message","configuration réussie");
+        return "Pages/succes";
+    }
     @GetMapping("/invalid-plateau")
     public String indisponibilite_plateau(Model model){
         model.addAttribute("plateaux",dao.findAll(new Plateau()));

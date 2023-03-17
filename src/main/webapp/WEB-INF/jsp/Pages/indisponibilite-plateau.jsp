@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
                 <h3 class="text-center">invalidite plateau</h3>
-                <form role="form" action="action" id="contact-form" method="post" autocomplete="off">
+                <form role="form" action="invalid-plateau" id="contact-form" method="post" autocomplete="off">
                     <div class="card-body">
                         <div class="mb-4">
                             <label class="form-label">le plateau</label>

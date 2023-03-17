@@ -22,6 +22,16 @@ public class PlateauDispo {
     Date notavailabledate;
     String observation;
 
+    @Override
+    public String toString() {
+        return "PlateauDispo{" +
+                "id=" + id +
+                ", plateau=" + plateau +
+                ", notavailabledate=" + notavailabledate +
+                ", observation='" + observation + '\'' +
+                '}';
+    }
+
     public Date getNotavailabledate() {
         return notavailabledate;
     }

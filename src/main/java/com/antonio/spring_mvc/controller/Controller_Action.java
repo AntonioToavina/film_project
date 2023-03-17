@@ -20,7 +20,15 @@ public class Controller_Action {
     @GetMapping("/action")
     public String to_createAction(Model model){
         model.addAttribute("acttype",dao.findAll(new Acttype()));
-        model.addAttribute("scenes",dao.findAll(new Scene()));
+
+        Scenestatus status = new Scenestatus();
+        status.setId(2);
+
+        Scene scene = new Scene();
+        scene.setScenestatus((Scenestatus) dao.findById(status));
+
+        model.addAttribute("scenes",dao.find(scene,true,0,0));
+
         model.addAttribute("acteurs",dao.findAll(new Acteur()));
         model.addAttribute("emotions",dao.findAll(new Emotion()));
 
@@ -28,7 +36,7 @@ public class Controller_Action {
     }
 
     @PostMapping("/action")
-    public String to_insertAction(@RequestParam() int acttype,@RequestParam() int scene,@RequestParam() int acteur,@RequestParam() int emotion,@RequestParam(defaultValue = "00:00") String debut,@RequestParam() String fin,@RequestParam() int duree,@RequestParam(defaultValue = "OO:OO") String action){
+    public String to_insertAction(@RequestParam() int acttype,@RequestParam() int scene,@RequestParam() int acteur,@RequestParam() int emotion,@RequestParam(defaultValue = "00:00") String debut,@RequestParam() String fin,@RequestParam() int duree,@RequestParam(defaultValue = "OO:OO") String action,Model model){
 
         Acttype type = new Acttype();
         type.setId(acttype);
@@ -52,7 +60,8 @@ public class Controller_Action {
         act.setActtype_id((Acttype) dao.findById(type));
 
         dao.save(act);
-        return "vide";
+        model.addAttribute("message","action crée avec succès");
+        return "Pages/succes";
     }
 
     public HibernateDAO getDao() {

@@ -2,6 +2,7 @@ package com.antonio.spring_mvc.controller;
 
 import com.antonio.spring_mvc.DAO.HibernateDAO;
 import com.antonio.spring_mvc.model.*;
+import com.antonio.spring_mvc.model.Act;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,15 +20,23 @@ public class Controller_Action {
     @GetMapping("/action")
     public String to_createAction(Model model){
         model.addAttribute("acttype",dao.findAll(new Acttype()));
-        model.addAttribute("scenes",dao.findAll(new Scene()));
+
+        Scenestatus status = new Scenestatus();
+        status.setId(2);
+
+        Scene scene = new Scene();
+        scene.setScenestatus((Scenestatus) dao.findById(status));
+
+        model.addAttribute("scenes",dao.find(scene,true,0,0));
+
         model.addAttribute("acteurs",dao.findAll(new Acteur()));
         model.addAttribute("emotions",dao.findAll(new Emotion()));
-        model.addAttribute("actions",dao.findAll(new Act()));
+
         return "Pages/creation-action";
     }
 
     @PostMapping("/action")
-    public String to_insertAction(@RequestParam() int acttype,@RequestParam() int scene,@RequestParam() int acteur,@RequestParam() int emotion,@RequestParam(defaultValue = "00:00") String debut,@RequestParam() String fin,@RequestParam() int duree,@RequestParam(defaultValue = "OO:OO") String action){
+    public String to_insertAction(@RequestParam() int acttype,@RequestParam() int scene,@RequestParam() int acteur,@RequestParam() int emotion,@RequestParam(defaultValue = "00:00") String debut,@RequestParam() String fin,@RequestParam() int duree,@RequestParam(defaultValue = "OO:OO") String action,Model model){
 
         Acttype type = new Acttype();
         type.setId(acttype);
@@ -38,7 +47,8 @@ public class Controller_Action {
         Emotion em = new Emotion();
         em.setId(emotion);
 
-        Act act = new Act();
+        Act act;
+        act = new Act();
         act.setFirsthour(java.sql.Time.valueOf(debut+":00"));
         act.setLasthour(java.sql.Time.valueOf(fin+":00"));
         act.setDuration(duree);
@@ -50,7 +60,8 @@ public class Controller_Action {
         act.setActtype_id((Acttype) dao.findById(type));
 
         dao.save(act);
-        return "";
+        model.addAttribute("message","action crée avec succès");
+        return "Pages/succes";
     }
 
     public HibernateDAO getDao() {

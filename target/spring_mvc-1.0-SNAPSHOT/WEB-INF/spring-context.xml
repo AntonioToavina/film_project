@@ -33,4 +33,7 @@
     <bean id="ctlmain" class="com.antonio.spring_mvc.controller.Controller_Main">
         <property name="dao" ref="hibernateDAO" />
     </bean>
+    <bean id="ctlplanning" class="com.antonio.spring_mvc.controller.Controller_planning">
+        <property name="dao" ref="hibernateDAO" />
+    </bean>
 </beans>

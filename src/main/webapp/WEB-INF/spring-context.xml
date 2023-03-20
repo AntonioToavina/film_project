@@ -8,7 +8,7 @@
         <property name="driverClassName" value="org.postgresql.Driver" />
         <property name="url" value="jdbc:postgresql://localhost:5432/film_production1" />
         <property name="username" value="postgres" />
-        <property name="password" value="0000" />
+        <property name="password" value="indro" />
     </bean>
 
     <!-- Hibernate 5 Annotation SessionFactory Bean definition-->
@@ -27,13 +27,19 @@
             </props>
         </property>
     </bean>
+
+
     <bean id="hibernateDAO" class="com.antonio.spring_mvc.DAO.HibernateDAO">
         <property name="factory" ref="sessionFactory" />
     </bean>
     <bean id="ctlmain" class="com.antonio.spring_mvc.controller.Controller_Main">
         <property name="dao" ref="hibernateDAO" />
     </bean>
+<<<<<<< Updated upstream
     <bean id="ctlplanning" class="com.antonio.spring_mvc.controller.Controller_planning">
+=======
+    <bean id="filmController" class="com.antonio.spring_mvc.controller.FilmController">
+>>>>>>> Stashed changes
         <property name="dao" ref="hibernateDAO" />
     </bean>
 </beans>

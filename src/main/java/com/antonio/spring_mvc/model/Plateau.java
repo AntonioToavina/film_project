@@ -60,4 +60,15 @@ public class Plateau {
     public int getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "Plateau{" +
+                "id=" + id +
+                ", location='" + location + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", plateauctg=" + plateauctg +
+                '}';
+    }
 }

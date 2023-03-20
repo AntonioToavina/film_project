@@ -7,7 +7,7 @@ import java.sql.Date;
 @Table(name = "film")
 public class Film {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "px_film_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "pk_film_id_seq")
     @SequenceGenerator(name="pk_film_id_seq" ,sequenceName = "film_id_seq",allocationSize = 1)
     private int id;
 

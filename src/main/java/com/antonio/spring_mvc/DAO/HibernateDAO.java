@@ -2,6 +2,7 @@ package com.antonio.spring_mvc.DAO;
 
 import com.antonio.spring_mvc.Service.Pagination;
 import com.antonio.spring_mvc.Service.Utility;
+import com.antonio.spring_mvc.model.Scenestatus;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,6 +17,22 @@ public class HibernateDAO implements InterfaceDAO{
     Transaction transaction;
 
     private SessionFactory factory;
+
+    public Transaction getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
 
     public void setFactory(SessionFactory factory) {
         this.factory = factory;
@@ -125,6 +142,25 @@ public class HibernateDAO implements InterfaceDAO{
         }finally {
             closeSession();
         }
+    }
+
+    public Object getHighClose(int kanefa){
+        try{
+            openConnection();
+            String request = "select s from Scenestatus s where value>"+kanefa+" order by value asc";
+            Object o = session.createQuery(request).list().get(0);
+            session.close();
+            return o;
+        }catch(Exception e){
+            e.printStackTrace();
+            if (this.transaction != null) {
+                this.transaction.rollback();
+            }
+        }finally {
+            closeSession();
+        }
+
+        return null;
     }
 
     @Override

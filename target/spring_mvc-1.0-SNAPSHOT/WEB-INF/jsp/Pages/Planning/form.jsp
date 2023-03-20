@@ -26,7 +26,11 @@
                         <div class="mb-4">
                             <label class="form-label">Choisir scènes</label>
                             <div class="input-group input-group-dynamic">
+<<<<<<< Updated upstream
                                 <select name="scene_id[]" class="form-select" multiple>
+=======
+                                <select name="scene_id[]" type="multiple" class="form-control">
+>>>>>>> Stashed changes
                                     <option value="1">Scène 1</option>
                                     <option value="2">Scène 2</option>
                                     <option value="3">Scène 3</option>

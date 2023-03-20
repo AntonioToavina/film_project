@@ -293,3 +293,7 @@ end status,case
 end value
 from
 v_scenestatus_tmp2 s join SceneStatus st on s.scenestatus_id = st.id;
+
+
+SELECT day from generate_series('2023-03-01'::date, '2023-03-25'::date, '1 day'::interval) AS day
+WHERE extract('dow' FROM day) not in (0, 6);

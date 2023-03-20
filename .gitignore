@@ -37,3 +37,4 @@ target/classes/com/antonio/spring_mvc/Service/Scene_Service.class
 target/classes/com/antonio/spring_mvc/Service/ServiceAuteur.class
 target/classes/com/antonio/spring_mvc/Service/Utility.class
 >>>>>>> Stashed changes
+*.class

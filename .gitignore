@@ -4,3 +4,4 @@ target/spring_mvc-1.0-SNAPSHOT/META-INF/MANIFEST.MF
 target/spring_mvc-1.0-SNAPSHOT/WEB-INF/spring-context.xml
 target/classes/com/antonio/spring_mvc/model/*.class
 target/spring_mvc-1.0-SNAPSHOT/WEB-INF/classes/com/antonio/spring_mvc/Service/*.class
+*.class

@@ -17,6 +17,7 @@
     CREATE SEQUENCE act_id_seq start 1 increment 1;
     CREATE SEQUENCE scenestatus_id_seq start 1 increment 1;
     CREATE SEQUENCE planning_id_seq start 1 increment 1;
+    CREATE SEQUENCE personne_id_seq start 1 increment 1;
 
 -- TABLES
 
@@ -265,7 +266,7 @@ CREATE TABLE Limitpage(
 
 INSERT INTO limitpage(valeur) values(5);
 
-CREATE SEQUENCE personne_id_seq start 1 increment 1;
+
 create table personne(
                          id integer primary key default nextval('personne_id_seq'),
                          nom varchar(50),

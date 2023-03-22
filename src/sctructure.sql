@@ -147,6 +147,8 @@ CREATE TABLE Plateaudispo(
     observation varchar(80),
     plateau_id integer REFERENCES Plateau(id) not null
 );
+
+INSERT INTO Plateaudispo VALUES (default, CURRENT_DATE,null,1);
 -- INSERT INTO Plateaudispo VALUES
 --                              (default, 1, '08:00', '18:00', 1),
 --                              (default, 2, '09:00', '17:00', 1),
@@ -295,5 +297,9 @@ from
 v_scenestatus_tmp2 s join SceneStatus st on s.scenestatus_id = st.id;
 
 
-SELECT day from generate_series('2023-03-01'::date, '2023-03-25'::date, '1 day'::interval) AS day
-WHERE extract('dow' FROM day) not in (0, 6);
+-- SELECT day from generate_series('2023-03-01'::date, '2023-03-25'::date, '1 day') AS day
+-- WHERE extract('dow' FROM day) not in (0, 6);
+
+CREATE OR REPLACE VIEW v_act AS
+    SELECT a.* from Act a join Scene S on a.scene_id = S.id
+join Plateau P on S.plateau_id = P.id join Film F on S.film_id = F.id order by P.plateauctg_id,s.plateau_id,f.production_date;

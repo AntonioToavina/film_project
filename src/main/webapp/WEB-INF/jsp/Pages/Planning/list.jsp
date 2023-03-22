@@ -5,6 +5,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <body>
 <section>
+
     <div class="container py-4">
         <form>
         <div class="row">
@@ -16,7 +17,7 @@
                         </div>
                         <div class="px-2">
                             <h6 class="mb-0">Debut</h6>
-                            <p class="mb-0">18/03/2023</p>
+                            <p class="mb-0">${debut}</p>
                         </div>
                     </div>
                     <div class="d-flex align-items-center p-3">
@@ -25,7 +26,7 @@
                         </div>
                         <div class="px-2">
                             <h6 class="mb-0">Fin</h6>
-                            <p class="mb-0">23/03/2023</p>
+                            <p class="mb-0">${fin}</p>
                         </div>
                     </div>
                     <div class="d-flex align-items-center p-3">
@@ -41,327 +42,61 @@
             </div>
             <div class="col-lg-12 mx-auto d-flex justify-content-center flex-column">
 
+                <c:forEach items="${planning}" var="list">
 
-                <div class="card" style="margin: 20px">
-                    <h5 class="card-header">Mardi 14 Mars 2023 <input type="checkbox" class="form-check"/></h5>
-                    <div class="card-body">
+                    <div class="card" style="margin: 20px">
+                        <h5 class="card-header">${list.date}<input type="checkbox" class="form-check"/></h5>
+                        <div class="card-body">
 
 
-                        <div class="table-responsive">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Debut</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Fin</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Plateau</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Catégorie d'action</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Personnage</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Emotion</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Scène</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Film</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
+                            <div class="table-responsive">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="form-check"/>
-                                        </td>
-                                        <td>08:10</td>
-                                        <td>09:10</td>
-                                        <td>Plage d'ankify</td>
-                                        <td>Dialogue</td>
-                                        <td>Dire: "Salut Modeste!"</td>
-                                        <td>Rakoto</td>
-                                        <td>joie</td>
-                                        <td>Rencontre sur une plage</td>
-                                        <td>Debut de la guerre</td>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                        </th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Debut</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Fin</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Plateau</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Catégorie d'action</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Personnage</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Emotion</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Scène</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Film</th>
                                     </tr>
-
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="form-check"/>
-                                        </td>
-                                        <td>08:10</td>
-                                        <td>09:10</td>
-                                        <td>Plage d'ankify</td>
-                                        <td>Dialogue</td>
-                                        <td>Dire: "Salut Modeste!"</td>
-                                        <td>Rakoto</td>
-                                        <td>joie</td>
-                                        <td>Rencontre sur une plage</td>
-                                        <td>Debut de la guerre</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="form-check"/>
-                                        </td>
-                                        <td>08:10</td>
-                                        <td>09:10</td>
-                                        <td>Plage d'ankify</td>
-                                        <td>Dialogue</td>
-                                        <td>Dire: "Salut Modeste!"</td>
-                                        <td>Rakoto</td>
-                                        <td>joie</td>
-                                        <td>Rencontre sur une plage</td>
-                                        <td>Debut de la guerre</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
 
 
-                    </div>
-                </div>
-                </div>
+                    <c:forEach items="${list.planningDetails}" var="act">
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="form-check"/>
+                            </td>
+                            <td>${act.firstHour}</td>
+                            <td>${act.lastHour}</td>
+                            <td>${act.act.scene_id.plateau.location}</td>
+                            <td>${act.act.acttype_id.typename}</td>
+                            <td>${act.act.action}</td>
+                            <td>${act.act.acteur_id.nom_acteur}</td>
+                            <td>${act.act.emotion_id.emotionname}</td>
+                            <td>${act.act.scene_id.description}</td>
+                            <td>${act.act.scene_id.film.description}</td>
+                        </tr>
+                    </c:forEach>
 
 
+                                    </tbody>
+                                </table>
 
 
-
-                <div class="card" style="margin: 20px">
-                    <h5 class="card-header">Mardi 14 Mars 2023 <input type="checkbox" class="form-check"/></h5>
-                    <div class="card-body">
-
-
-                        <div class="table-responsive">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Debut</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Fin</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Plateau</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Catégorie d'action</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Personnage</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Emotion</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Scène</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Film</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="form-check"/>
-                                    </td>
-                                    <td>08:10</td>
-                                    <td>09:10</td>
-                                    <td>Plage d'ankify</td>
-                                    <td>Dialogue</td>
-                                    <td>Dire: "Salut Modeste!"</td>
-                                    <td>Rakoto</td>
-                                    <td>joie</td>
-                                    <td>Rencontre sur une plage</td>
-                                    <td>Debut de la guerre</td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="form-check"/>
-                                    </td>
-                                    <td>08:10</td>
-                                    <td>09:10</td>
-                                    <td>Plage d'ankify</td>
-                                    <td>Dialogue</td>
-                                    <td>Dire: "Salut Modeste!"</td>
-                                    <td>Rakoto</td>
-                                    <td>joie</td>
-                                    <td>Rencontre sur une plage</td>
-                                    <td>Debut de la guerre</td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="form-check"/>
-                                    </td>
-                                    <td>08:10</td>
-                                    <td>09:10</td>
-                                    <td>Plage d'ankify</td>
-                                    <td>Dialogue</td>
-                                    <td>Dire: "Salut Modeste!"</td>
-                                    <td>Rakoto</td>
-                                    <td>joie</td>
-                                    <td>Rencontre sur une plage</td>
-                                    <td>Debut de la guerre</td>
-                                </tr>
-                                </tbody>
-                            </table>
-
-
+                            </div>
                         </div>
                     </div>
-                </div>
 
-
-
-
-
-
-                <div class="card" style="margin: 20px">
-                    <h5 class="card-header">Mardi 14 Mars 2023 <input type="checkbox" class="form-check"/></h5>
-                    <div class="card-body">
-
-
-                        <div class="table-responsive">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Debut</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Fin</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Plateau</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Catégorie d'action</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Personnage</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Emotion</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Scène</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Film</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="form-check"/>
-                                    </td>
-                                    <td>08:10</td>
-                                    <td>09:10</td>
-                                    <td>Plage d'ankify</td>
-                                    <td>Dialogue</td>
-                                    <td>Dire: "Salut Modeste!"</td>
-                                    <td>Rakoto</td>
-                                    <td>joie</td>
-                                    <td>Rencontre sur une plage</td>
-                                    <td>Debut de la guerre</td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="form-check"/>
-                                    </td>
-                                    <td>08:10</td>
-                                    <td>09:10</td>
-                                    <td>Plage d'ankify</td>
-                                    <td>Dialogue</td>
-                                    <td>Dire: "Salut Modeste!"</td>
-                                    <td>Rakoto</td>
-                                    <td>joie</td>
-                                    <td>Rencontre sur une plage</td>
-                                    <td>Debut de la guerre</td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="form-check"/>
-                                    </td>
-                                    <td>08:10</td>
-                                    <td>09:10</td>
-                                    <td>Plage d'ankify</td>
-                                    <td>Dialogue</td>
-                                    <td>Dire: "Salut Modeste!"</td>
-                                    <td>Rakoto</td>
-                                    <td>joie</td>
-                                    <td>Rencontre sur une plage</td>
-                                    <td>Debut de la guerre</td>
-                                </tr>
-                                </tbody>
-                            </table>
-
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-                <div class="card" style="margin: 20px">
-                    <h5 class="card-header">Mardi 14 Mars 2023 <input type="checkbox" class="form-check"/></h5>
-                    <div class="card-body">
-
-
-                        <div class="table-responsive">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Debut</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Fin</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Plateau</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Catégorie d'action</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Personnage</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Emotion</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Scène</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Film</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="form-check"/>
-                                    </td>
-                                    <td>08:10</td>
-                                    <td>09:10</td>
-                                    <td>Plage d'ankify</td>
-                                    <td>Dialogue</td>
-                                    <td>Dire: "Salut Modeste!"</td>
-                                    <td>Rakoto</td>
-                                    <td>joie</td>
-                                    <td>Rencontre sur une plage</td>
-                                    <td>Debut de la guerre</td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="form-check"/>
-                                    </td>
-                                    <td>08:10</td>
-                                    <td>09:10</td>
-                                    <td>Plage d'ankify</td>
-                                    <td>Dialogue</td>
-                                    <td>Dire: "Salut Modeste!"</td>
-                                    <td>Rakoto</td>
-                                    <td>joie</td>
-                                    <td>Rencontre sur une plage</td>
-                                    <td>Debut de la guerre</td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="form-check"/>
-                                    </td>
-                                    <td>08:10</td>
-                                    <td>09:10</td>
-                                    <td>Plage d'ankify</td>
-                                    <td>Dialogue</td>
-                                    <td>Dire: "Salut Modeste!"</td>
-                                    <td>Rakoto</td>
-                                    <td>joie</td>
-                                    <td>Rencontre sur une plage</td>
-                                    <td>Debut de la guerre</td>
-                                </tr>
-                                </tbody>
-                            </table>
-
-
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
 
 
 

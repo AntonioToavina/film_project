@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
                 <h3 class="text-center">Suggestion de planning</h3>
-                <form role="form" action="/scenes" id="contact-form" method="post" autocomplete="off">
+                <form role="form" action="/planning/suggest_list" id="contact-form" method="get" autocomplete="off">
                     <div class="card-body">
                         <div class="mb-4">
                             <label class="form-label">Debut</label>
@@ -69,7 +69,7 @@
 
             // mettre à jour la valeur de l'élément input caché
             const selectedScenesInput = document.querySelector('input[name="selected-scenes"]');
-            selectedScenesInput.value = selectedScenes;
+            selectedScenesInput.value = selectedScenes.join(',');
 
             // afficher les scènes sélectionnées dans la div correspondante
             const selectedScenesDiv = document.querySelector('#selected-scenes');

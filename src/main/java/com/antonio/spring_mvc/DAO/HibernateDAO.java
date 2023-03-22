@@ -1,13 +1,14 @@
 package com.antonio.spring_mvc.DAO;
 
-import com.antonio.spring_mvc.Service.Pagination;
 import com.antonio.spring_mvc.Service.Utility;
-import com.antonio.spring_mvc.model.Scenestatus;
+import com.antonio.spring_mvc.model.Act;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -107,6 +108,29 @@ public class HibernateDAO implements InterfaceDAO{
         return results;
     }
 
+    public List<Object> findActOrderByPlateau(String scenes){
+        this.transaction = null;
+        this.session=null;
+        List<Object> results=null;
+
+        String request = "SELECT * from v_act where scene_id in ("+scenes+") and act_id is null";
+
+        try{
+            openConnection();
+            Query cr=this.session.createNativeQuery(request, Act.class);
+
+            results=cr.getResultList();
+        }catch(Exception e ){
+            e.printStackTrace();
+            if (this.transaction != null) {
+                this.transaction.rollback();
+            }
+        }finally{
+            closeSession();
+        }
+        return results;
+    }
+
     @Override
     public void save(Object obj) {
         this.transaction = null;
@@ -162,6 +186,8 @@ public class HibernateDAO implements InterfaceDAO{
 
         return null;
     }
+
+
 
     @Override
     public void delete(Object obj){

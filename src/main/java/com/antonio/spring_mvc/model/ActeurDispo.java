@@ -1,8 +1,11 @@
 package com.antonio.spring_mvc.model;
 
+import com.antonio.spring_mvc.DAO.HibernateDAO;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 @Entity
 @Table(name = "acteurdispo")
@@ -52,4 +55,5 @@ public class ActeurDispo {
     public int getId() {
         return id;
     }
+
 }

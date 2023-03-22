@@ -29,7 +29,7 @@
               <a href="/planning/suggest_form" class="dropdown-item border-radius-md">
                 <span>Suggestion</span>
               </a>
-              <a href="/planning/suggest_list" class="dropdown-item border-radius-md">
+              <a href="" class="dropdown-item border-radius-md">
                 <span>Planning</span>
               </a>
 

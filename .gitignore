@@ -1,5 +1,3 @@
 src/main/webapp/WEB-INF/spring-context.xml
-target/spring_mvc-1.0-SNAPSHOT.war
-target/spring_mvc-1.0-SNAPSHOT/META-INF/MANIFEST.MF
-target/spring_mvc-1.0-SNAPSHOT/WEB-INF/spring-context.xml
+target/*
 *.class

@@ -4,10 +4,7 @@ import com.antonio.spring_mvc.DAO.HibernateDAO;
 import com.antonio.spring_mvc.Service.Acteur_Service;
 import com.antonio.spring_mvc.Service.Pagination;
 import com.antonio.spring_mvc.Service.Scene_Service;
-import com.antonio.spring_mvc.model.Acteur;
-import com.antonio.spring_mvc.model.ActeurDispo;
-import com.antonio.spring_mvc.model.Film;
-import com.antonio.spring_mvc.model.Plateau;
+import com.antonio.spring_mvc.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,13 +21,14 @@ public class Controller_Main {
     public String to_createScene(Model model){
         model.addAttribute("films",dao.findAll(new Film()));
         model.addAttribute("plateaux",dao.findAll(new Plateau()));
+        model.addAttribute("auteurs",dao.findAll(new Auteur()));
         return "index";
     }
 
 
     @PostMapping("/scenes")
-    public String createScene(@RequestParam int film_id, @RequestParam int plateau_id, @RequestParam String description){
-        new Scene_Service().newScene(film_id,plateau_id,description,dao);
+    public String createScene(@RequestParam int film_id,@RequestParam int auteur_id ,@RequestParam int plateau_id, @RequestParam String description){
+        new Scene_Service().newScene(film_id,plateau_id,auteur_id,description,dao);
         return "redirect: /index";
     }
 

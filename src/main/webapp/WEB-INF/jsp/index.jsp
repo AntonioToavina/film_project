@@ -31,6 +31,16 @@
                             </div>
                         </div>
                         <div class="mb-4">
+                            <label class="form-label">Auteurs</label>
+                            <div class="input-group input-group-dynamic">
+                                <select name="auteur_id" class="form-control" >
+                                    <c:forEach items="${auteurs}" var="auteur">
+                                        <option value="${auteur.id}">${auteur.nom} ${auteur.prenom}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4">
                             <label class="form-label">Description</label>
                             <div class="input-group input-group-dynamic">
                                 <textarea name="description" class="form-control" id="message" rows="4"></textarea>

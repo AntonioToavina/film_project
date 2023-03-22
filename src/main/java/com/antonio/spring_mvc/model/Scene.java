@@ -11,10 +11,11 @@ public class Scene {
 
     public Scene(){}
 
-    public Scene(Film film, Plateau plateau, String description) {
+    public Scene(Film film, Plateau plateau, Auteur auteur,String description) {
         this.film = film;
         this.plateau = plateau;
         this.description = description;
+        this.auteur=auteur;
     }
 
     @Id
@@ -35,6 +36,18 @@ public class Scene {
     @OneToOne
     @JoinColumn(name = "scenestatus_id",referencedColumnName = "id")
     Scenestatus scenestatus;
+
+    @OneToOne
+    @JoinColumn(name = "auteur_id",referencedColumnName = "id")
+    Auteur auteur;
+
+    public Auteur getAuteur() {
+        return auteur;
+    }
+
+    public void setAuteur(Auteur auteur) {
+        this.auteur = auteur;
+    }
 
     public Scenestatus getScenestatus() {
         return scenestatus;

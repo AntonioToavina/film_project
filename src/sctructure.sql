@@ -258,6 +258,24 @@ CREATE TABLE Planning (
     act_id integer REFERENCES Act(id) not null
 );
 
+CREATE TABLE Auteur (
+    id serial primary key,
+    nom varchar(20) NOT NULL,
+    prenom varchar(50) NOT NULL
+);
+
+INSERT INTO Auteur(nom,prenom) values
+    ('Stephen','King'),
+('J.K.' ,'Rowling'),
+('George R.R.' ,'Martin'),
+('Jane', 'Austen'),
+('Ernest' ,'Hemingway'),
+('Margaret' ,'Atwood'),
+('Haruki' ,'Murakami'),
+('Neil' ,'Gaiman'),
+('Gabriel Garcia' ,'Marquez'),
+('Toni' ,'Morrison');
+
 CREATE TABLE Limitpage(
     id serial primary key,
     valeur smallint not null default 5

@@ -283,8 +283,6 @@ CREATE TABLE Limitpage(
 
 INSERT INTO limitpage(valeur) values(5);
 
-
-
 -- Vue pour le status des scènes avec planifié ou non
 
 CREATE OR REPLACE VIEW v_scenestatus_tmp AS

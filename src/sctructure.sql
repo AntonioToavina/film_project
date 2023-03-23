@@ -17,6 +17,7 @@
     CREATE SEQUENCE act_id_seq start 1 increment 1;
     CREATE SEQUENCE scenestatus_id_seq start 1 increment 1;
     CREATE SEQUENCE planning_id_seq start 1 increment 1;
+    CREATE SEQUENCE personne_id_seq start 1 increment 1;
 
 -- TABLES
 
@@ -107,6 +108,8 @@ CREATE TABLE Acteurdispo(
     acteur_id integer REFERENCES Acteur(id) not null
 );
 
+INSERT INTO Acteurdispo VALUES (default, '2023-03-24',null,1);
+
 -- INSERT INTO ActeurDispo VALUES(default, 1, '08:00', '12:00', 1),
 --                               (default, 2, '13:00', '18:00', 1),
 --                               (default, 3, '09:00', '17:00', 1),
@@ -147,6 +150,8 @@ CREATE TABLE Plateaudispo(
     observation varchar(80),
     plateau_id integer REFERENCES Plateau(id) not null
 );
+
+INSERT INTO Plateaudispo VALUES (default, CURRENT_DATE,null,1);
 -- INSERT INTO Plateaudispo VALUES
 --                              (default, 1, '08:00', '18:00', 1),
 --                              (default, 2, '09:00', '17:00', 1),
@@ -265,6 +270,27 @@ CREATE TABLE Limitpage(
 
 INSERT INTO limitpage(valeur) values(5);
 
+
+create table personne(
+                         id integer primary key default nextval('personne_id_seq'),
+                         nom varchar(50),
+                         prenom varchar(50)
+);
+INSERT INTO personne(nom, prenom) VALUES
+                                      ('Doe', 'John'),
+                                      ('Smith', 'Jane'),
+                                      ('Williams', 'Mike'),
+                                      ('Brown', 'Sarah'),
+                                      ('Taylor', 'David'),
+                                      ('Johnson', 'Emily'),
+                                      ('Anderson', 'Chris'),
+                                      ('Martin', 'Amanda'),
+                                      ('Jones', 'Brian'),
+                                      ('Wilson', 'Laura');
+alter table scene add column auteur_id integer references personne(id);
+update scene set auteur_id = id where true;
+alter table scene alter column auteur_id set not null;
+
 -- Vue pour le status des scènes avec planifié ou non
 
 CREATE OR REPLACE VIEW v_scenestatus_tmp AS
@@ -291,3 +317,11 @@ end status,case
 end value
 from
 v_scenestatus_tmp2 s join SceneStatus st on s.scenestatus_id = st.id;
+
+
+-- SELECT day from generate_series('2023-03-01'::date, '2023-03-25'::date, '1 day') AS day
+-- WHERE extract('dow' FROM day) not in (0, 6);
+
+CREATE OR REPLACE VIEW v_act AS
+    SELECT a.* from Act a join Scene S on a.scene_id = S.id
+join Plateau P on S.plateau_id = P.id join Film F on S.film_id = F.id order by P.plateauctg_id,s.plateau_id,f.production_date;

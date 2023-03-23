@@ -6,15 +6,20 @@ import com.antonio.spring_mvc.Service.Pagination;
 import com.antonio.spring_mvc.Service.Scene_Service;
 import com.antonio.spring_mvc.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.sql.Date;
+import java.util.List;
 
 @Controller
 public class Controller_Main {
     @Autowired
     HibernateDAO dao;
+
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate){}
+
     public void setDao(HibernateDAO dao) {}
 
     @GetMapping("/index")
@@ -65,6 +70,19 @@ public class Controller_Main {
     public String newIndipsonibilite(@PathVariable int idacteur, String observation, Date notavailabledate, Model model){
         new Acteur_Service().newIndisponibility(idacteur,observation,notavailabledate,dao);
         return "redirect: /acteurs/"+idacteur+"/to_addIndisponibilite";
+    }
+
+    @GetMapping("/scenes/{idFilm}")
+    public String listWithModification(Model model,@PathVariable int idFilm){
+        model.addAttribute("allMatchScenes",new Scene_Service().findByFilmId(dao,idFilm));
+        model.addAttribute("maxStatusId",new Scene_Service().findMaxId(dao));
+        return "Pages/ListScenesModification";
+    }
+
+    @PostMapping("/scenes/updateStatus/{idFilm}/{idScene}")
+    public String doUpdateStatus(@PathVariable  int idFilm,@PathVariable  int idScene,Model model){
+        new Scene_Service().upgradeSceneStatus(dao,idScene);
+        return "redirect: /scenes/"+idFilm;
     }
 
 }

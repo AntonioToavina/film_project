@@ -1,12 +1,5 @@
 src/main/webapp/WEB-INF/spring-context.xml
-target/spring_mvc-1.0-SNAPSHOT.war
-target/spring_mvc-1.0-SNAPSHOT/META-INF/MANIFEST.MF
-target/spring_mvc-1.0-SNAPSHOT/WEB-INF/spring-context.xml
-target/classes/com/antonio/spring_mvc/model/Acttype.class
-*.class
-*.class
-*.class
-*.class
+target/*
 *.class
 target/spring_mvc-1.0-SNAPSHOT/WEB-INF/classes/com/antonio/spring_mvc/Service/Utility.class
 target/spring_mvc-1.0-SNAPSHOT/WEB-INF/classes/com/antonio/spring_mvc/Service/ServiceAuteur.class

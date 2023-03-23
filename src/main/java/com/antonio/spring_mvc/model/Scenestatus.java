@@ -37,4 +37,13 @@ public class Scenestatus {
     public int getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "Scenestatus{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", value=" + value +
+                '}';
+    }
 }

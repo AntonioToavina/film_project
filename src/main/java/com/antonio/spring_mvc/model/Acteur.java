@@ -1,7 +1,10 @@
 package com.antonio.spring_mvc.model;
 
+import com.antonio.spring_mvc.DAO.HibernateDAO;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "acteur")
@@ -50,5 +53,19 @@ public class Acteur {
 
     public int getId() {
         return id;
+    }
+
+
+    public boolean isAvailable(Date date, HibernateDAO dao){
+        ActeurDispo acteurDispo = new ActeurDispo();
+        acteurDispo.setActeur(this);
+
+        List<ActeurDispo> notAvailables = (List) dao.find(acteurDispo,true,0,0);
+        for (ActeurDispo dispo : notAvailables) {
+            if (dispo.getNotavailabledate().equals(date)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

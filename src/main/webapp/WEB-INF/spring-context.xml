@@ -27,10 +27,18 @@
             </props>
         </property>
     </bean>
+
+
     <bean id="hibernateDAO" class="com.antonio.spring_mvc.DAO.HibernateDAO">
         <property name="factory" ref="sessionFactory" />
     </bean>
     <bean id="ctlmain" class="com.antonio.spring_mvc.controller.Controller_Main">
+        <property name="dao" ref="hibernateDAO" />
+    </bean>
+    <bean id="ctlplanning" class="com.antonio.spring_mvc.controller.Controller_planning">
+        <property name="dao" ref="hibernateDAO" />
+    </bean>
+    <bean id="filmController" class="com.antonio.spring_mvc.controller.FilmController">
         <property name="dao" ref="hibernateDAO" />
     </bean>
 </beans>

@@ -1,7 +1,11 @@
 package com.antonio.spring_mvc.model;
 
+import com.antonio.spring_mvc.DAO.HibernateDAO;
+
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="act")
@@ -135,6 +139,22 @@ public class Act {
         this.emotion_id = emotion_id;
     }
 
+
+    public List<Act> getActRelated(HibernateDAO dao){
+        Act a=new Act();
+        a.setAct_id(this);
+        List<Act> related = (List) dao.find(a,true,0,0);
+        List<Act> result = new ArrayList<>();
+        result.addAll(related);
+        for (Act actR :
+                related) {
+            result.addAll(actR.getActRelated(dao));
+
+        }
+        return result;
+
+    }
+
     public Act getAct_id() {
         return act_id;
     }
@@ -142,4 +162,6 @@ public class Act {
     public void setAct_id(Act act_id) {
         this.act_id = act_id;
     }
+
+
 }

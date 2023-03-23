@@ -92,10 +92,11 @@ public class Scene {
     @Override
     public String toString() {
         return "Scene{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", film=" + film +
                 ", plateau=" + plateau +
                 ", description='" + description + '\'' +
+                ", scenestatus=" + scenestatus +
                 '}';
     }
 }

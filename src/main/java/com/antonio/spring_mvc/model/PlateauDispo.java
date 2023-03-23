@@ -13,24 +13,12 @@ public class PlateauDispo {
     @SequenceGenerator(name = "pk_plateaudispo_id_seq",sequenceName = " plateaudispo_id_seq",allocationSize = 1)
     private int id;
 
+    Date notavailabledate;
 
-
+    String observation;
     @ManyToOne(targetEntity = Plateau.class,fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "plateau_id", referencedColumnName = "id")
     Plateau plateau;
-
-    Date notavailabledate;
-    String observation;
-
-    @Override
-    public String toString() {
-        return "PlateauDispo{" +
-                "id=" + id +
-                ", plateau=" + plateau +
-                ", notavailabledate=" + notavailabledate +
-                ", observation='" + observation + '\'' +
-                '}';
-    }
 
     public Date getNotavailabledate() {
         return notavailabledate;

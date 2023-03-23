@@ -1,6 +1,10 @@
 package com.antonio.spring_mvc.model;
 
+import com.antonio.spring_mvc.DAO.HibernateDAO;
+
 import javax.persistence.*;
+import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "plateau")
@@ -59,5 +63,29 @@ public class Plateau {
 
     public int getId() {
         return id;
+    }
+
+    public boolean isAvailable(Date date, HibernateDAO dao){
+        PlateauDispo plateaudispo = new PlateauDispo();
+        plateaudispo.setPlateau(this);
+
+        List<PlateauDispo> notAvailables = (List) dao.find(plateaudispo,true,0,0);
+        for (PlateauDispo dispo : notAvailables) {
+            if (dispo.getNotavailabledate().equals(date)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Plateau{" +
+                "id=" + id +
+                ", location='" + location + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", plateauctg=" + plateauctg +
+                '}';
     }
 }

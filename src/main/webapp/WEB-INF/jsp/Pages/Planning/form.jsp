@@ -26,6 +26,7 @@
                         <div class="mb-4">
                             <button type="button" class="btn bg-gradient-info" onclick="openSlideout()">Choisir Scènes</button>
                             <input type="hidden" name="selected-scenes" value="">
+                            <input type="hidden" name="display-scenes" value="">
                             <div class="mb-4">
                                 <label class="form-label">Scènes sélectionnées</label>
                                 <div id="selected-scenes"></div>
@@ -70,6 +71,9 @@
             // mettre à jour la valeur de l'élément input caché
             const selectedScenesInput = document.querySelector('input[name="selected-scenes"]');
             selectedScenesInput.value = selectedScenes.join(',');
+
+            const selectedScenesInputDisplay = document.querySelector('input[name="display-scenes"]');
+            selectedScenesInputDisplay.value = selectedScenesLabel.join(', ');
 
             // afficher les scènes sélectionnées dans la div correspondante
             const selectedScenesDiv = document.querySelector('#selected-scenes');

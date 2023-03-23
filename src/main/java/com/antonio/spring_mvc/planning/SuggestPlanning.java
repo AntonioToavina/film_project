@@ -83,7 +83,7 @@ public class SuggestPlanning {
         List<Date> dates=getAvailableDates(date1,date2);
         List<Act> acts= (List) dao.findActOrderByPlateau(scenes);
 
-        System.out.println("ACT SIZE: "+acts.size());
+        System.out.println("DATE SIZE: "+dates.size());
         for (Date d :
                 dates) {
             SuggestPlanning planning = new SuggestPlanning(d);
@@ -108,13 +108,13 @@ public class SuggestPlanning {
                     toRemove.add(p.getAct());
 
                     // Vérifiez si l'activité appartient au même plateau que la dernière activité ajoutée
-                    if(i<acts.size()-1)
-                        if(!acts.get(i+1).getScene_id().getPlateau().equals(acts.get(i).getScene_id().getPlateau())){
 
-                            break;
-                        }
                 }
+                if(i<acts.size()-1)
+                    if(!acts.get(i+1).getScene_id().getPlateau().equals(acts.get(i).getScene_id().getPlateau())){
 
+                        break;
+                    }
 
 
             }
@@ -173,10 +173,15 @@ public class SuggestPlanning {
                         pr) {
                     timingHourList.add(new TimingHour(pt.getFirstHour(),pt.getLastHour()));
                 }
+
                 planningDetailsList.addAll(pr);
 
 
             }
+
+//            System.out.println("size1: "+planningDetailsList.size()+ " ; size2: "+related.size());
+            if(planningDetailsList.size()-1!=related.size())
+                return new ArrayList<>();
         }
 
 

@@ -47,12 +47,12 @@ public class Controller_planning {
         return "Pages/Planning/form";
     }
     @GetMapping("suggest_list")
-    public String toList(@RequestParam Date debut, @RequestParam Date fin, @RequestParam(name = "selected-scenes") String scenes, Model model){
+    public String toList(@RequestParam Date debut, @RequestParam Date fin, @RequestParam(name = "selected-scenes") String scenes, @RequestParam(name = "display-scenes") String displayscenes, Model model){
 
 
         model.addAttribute("debut",debut);
         model.addAttribute("fin",fin);
-        model.addAttribute("scenes",scenes);
+        model.addAttribute("scenes",displayscenes);
 
         SuggestPlanning suggestPlanning = new SuggestPlanning();
         List<SuggestPlanning> planning = suggestPlanning.suggestPlanning(getDao(),debut,fin,scenes);

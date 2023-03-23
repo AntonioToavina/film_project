@@ -108,6 +108,8 @@ CREATE TABLE Acteurdispo(
     acteur_id integer REFERENCES Acteur(id) not null
 );
 
+INSERT INTO Acteurdispo VALUES (default, '2023-03-24',null,1);
+
 -- INSERT INTO ActeurDispo VALUES(default, 1, '08:00', '12:00', 1),
 --                               (default, 2, '13:00', '18:00', 1),
 --                               (default, 3, '09:00', '17:00', 1),

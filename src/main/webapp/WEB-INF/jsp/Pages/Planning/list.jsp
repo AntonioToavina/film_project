@@ -35,7 +35,7 @@
                         </div>
                         <div class="px-2">
                             <h6 class="mb-0">Scènes</h6>
-                            <p class="mb-0">scène 1 , scène 2 , scène 3 , scène 4 , scène 5</p>
+                            <p class="mb-0">${scenes}</p>
                         </div>
                     </div>
                 </div>

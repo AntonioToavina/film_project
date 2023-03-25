@@ -7,7 +7,7 @@
 <section>
 
     <div class="container py-4">
-        <form>
+        <form method="post" action="/planning/save">
         <div class="row">
             <div class="col-md-12 col-lg-4 col-xl-4">
                 <div class="d-flex flex-column justify-content-center align-items-start h-100">
@@ -45,7 +45,7 @@
                 <c:forEach items="${planning}" var="list">
 
                     <div class="card" style="margin: 20px">
-                        <h5 class="card-header">${list.date}<input type="checkbox" class="form-check"/></h5>
+                        <h5 class="card-header">${list.date}<input type="checkbox" class="form-check date-checkbox" onclick="toggleDateCheckboxes(this)" checked/></h5>
                         <div class="card-body">
 
 
@@ -73,7 +73,10 @@
                     <c:forEach items="${list.planningDetails}" var="act">
                         <tr>
                             <td>
-                                <input type="checkbox" class="form-check"/>
+                                <input type="checkbox" onchange="toggleHiddenInputs(this)" name="act_id" value="${act.act.id}" class="form-check checkbox" data-date="${list.date}" checked/>
+                                <input type="hidden" name="date" value="${list.date}"/>
+                                <input type="hidden" name="debut" value="${act.firstHour}"/>
+<%--                                <input type="hidden" name="fin" value="${act.lastHour}"/>--%>
                             </td>
                             <td>${act.firstHour}</td>
                             <td>${act.lastHour}</td>
@@ -117,4 +120,30 @@
 
 </section>
 </body>
+
+<script>
+    function toggleDateCheckboxes(checkbox) {
+        const isChecked = checkbox.checked;
+        const date = checkbox.parentElement.textContent.trim();
+        const checkboxes = document.querySelectorAll('.checkbox[data-date="'+date+'"]');
+        // checkboxes.forEach(cb =>
+        //     cb.checked = isChecked
+        // );
+        checkboxes.forEach(cb => {
+            cb.checked = isChecked;
+            toggleHiddenInputs(cb)
+        });
+
+    }
+
+    function toggleHiddenInputs(cb){
+        const isChecked = cb.checked;
+
+        const row = cb.closest('tr');
+        const inputs = row.querySelectorAll('input[type="hidden"]');
+        console.log(inputs)
+        inputs.forEach(input => input.disabled = !isChecked);
+    }
+
+</script>
 <jsp:include page="../../Footer.jsp" />

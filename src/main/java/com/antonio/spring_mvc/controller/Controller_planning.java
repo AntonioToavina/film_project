@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -43,7 +44,7 @@ public class Controller_planning {
 
         model.addAttribute("scenes",dao.find(scenestatus,true,0,0));
         SuggestPlanning planning=new SuggestPlanning();
-        model.addAttribute("dates",planning.getAvailableDates(Date.valueOf("2023-03-21"),Date.valueOf("2023-03-30")));
+        model.addAttribute("dates",planning.getAvailableDates(Date.valueOf("2023-03-21"),Date.valueOf("2023-03-30"),getDao()));
         return "Pages/Planning/form";
     }
     @GetMapping("suggest_list")
@@ -58,5 +59,27 @@ public class Controller_planning {
         List<SuggestPlanning> planning = suggestPlanning.suggestPlanning(getDao(),debut,fin,scenes);
         model.addAttribute("planning",planning);
         return "Pages/Planning/list";
+    }
+
+    @PostMapping("/save")
+    public String savePlanning(@RequestParam int[] act_id, @RequestParam Date[] date, @RequestParam Time[] debut){
+
+//        System.out.println("act_id: "+act_id.length);
+//        System.out.println("date: "+date.length);
+//        System.out.println("debut: "+debut.length);
+
+//        for (int i = 0; i < act_id.length; i++) {
+//            int id = act_id[i];
+//            Date dateValue = date[i];
+//            Time debutValue = debut[i];
+//            System.out.println("act_id: " + id + ", date: " + dateValue + ", debut: " + debutValue );
+//        }
+
+        SuggestPlanning service=new SuggestPlanning();
+
+        service.savePlanning(getDao(),act_id, date, debut);
+
+
+        return "redirect:/index";
     }
 }

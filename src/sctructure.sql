@@ -325,3 +325,5 @@ v_scenestatus_tmp2 s join SceneStatus st on s.scenestatus_id = st.id;
 CREATE OR REPLACE VIEW v_act AS
     SELECT a.* from Act a join Scene S on a.scene_id = S.id
 join Plateau P on S.plateau_id = P.id join Film F on S.film_id = F.id order by P.plateauctg_id,s.plateau_id,f.production_date;
+
+SELECT a.id,p.id from v_act a left join planning p on a.id = p.act_id where p.id is null;

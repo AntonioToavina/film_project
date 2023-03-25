@@ -2,10 +2,16 @@ package com.antonio.spring_mvc.planning;
 
 import com.antonio.spring_mvc.DAO.HibernateDAO;
 import com.antonio.spring_mvc.model.Act;
+import com.antonio.spring_mvc.model.ActeurDispo;
+import com.antonio.spring_mvc.model.Planning;
+import com.antonio.spring_mvc.model.PlateauDispo;
 
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class SuggestPlanning {
@@ -58,7 +64,7 @@ public class SuggestPlanning {
             dao.closeSession();
         }
     }
-    public List<Date> getAvailableDates(Date date1, Date date2) {
+    public List<Date> getAvailableDates(Date date1, Date date2,HibernateDAO dao) {
         List<Date> availableDates = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date1);
@@ -66,9 +72,14 @@ public class SuggestPlanning {
         while (calendar.getTime().compareTo(date2)<=0) {
             int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
-            if (dayOfWeek != Calendar.SATURDAY && dayOfWeek != Calendar.SUNDAY) {
-                availableDates.add(new Date(calendar.getTime().getTime()));
-            }
+            Date d = new Date(calendar.getTime().getTime());
+
+            System.out.println("Date: "+d+ " ; isPlanned: "+datePlanned(d,dao));
+            if(!datePlanned(d,dao))
+                if (dayOfWeek != Calendar.SATURDAY && dayOfWeek != Calendar.SUNDAY) {
+                    availableDates.add(d);
+                }
+
 
             calendar.add(Calendar.DATE, 1);
         }
@@ -80,10 +91,10 @@ public class SuggestPlanning {
     public List<SuggestPlanning> suggestPlanning(HibernateDAO dao, Date date1 , Date date2, String scenes){
         List<SuggestPlanning> planningList = new ArrayList<>();
 
-        List<Date> dates=getAvailableDates(date1,date2);
+        List<Date> dates=getAvailableDates(date1,date2,dao);
         List<Act> acts= (List) dao.findActOrderByPlateau(scenes);
 
-        System.out.println("DATE SIZE: "+dates.size());
+//        System.out.println("DATE SIZE: "+dates.size());
         for (Date d :
                 dates) {
             SuggestPlanning planning = new SuggestPlanning(d);
@@ -188,6 +199,84 @@ public class SuggestPlanning {
 
         return planningDetailsList;
 
+    }
+
+
+    public List<Planning> buildPlanning(HibernateDAO dao,int[] act_id, Date[] date, Time[] debut){
+        List<Planning> plannings= new ArrayList<>();
+        for (int i = 0; i < act_id.length; i++) {
+            Planning p =new Planning();
+
+            Act a=new Act();
+            a.setId(act_id[i]);
+            a= (Act) dao.findById(a);
+
+            // Get the date and time as LocalDateTime objects
+            LocalDateTime dateTime = LocalDateTime.of(date[i].toLocalDate(), debut[i].toLocalTime());
+
+// Convert to Timestamp object
+            Timestamp time = Timestamp.valueOf(dateTime);
+
+
+            System.out.println("Date: "+date[i]+" : "+debut[i]+" ; ACT: "+a.getId()+" ; time: "+ time);
+
+            p.setAct(a);
+            p.setPlanningdate(time);
+
+            plannings.add(p);
+
+
+        }
+
+        return plannings;
+    }
+
+    public void savePlanning(HibernateDAO dao,List<Planning> planningList){
+
+        String observation= "planifié";
+
+//        System.out.println("SIZE: AAAAAAAAAAAAAAAAAAAAAAAAA / ");
+//        System.out.println(planningList.size());
+        for (Planning p :
+                planningList) {
+            Date notAvailable = Date.valueOf(p.getPlanningdate().toLocalDateTime().toLocalDate());
+
+            PlateauDispo pd=new PlateauDispo();
+            pd.setPlateau(p.getAct().getScene_id().getPlateau());
+            pd.setNotavailabledate(notAvailable);
+            pd.setObservation(observation);
+
+
+
+            ActeurDispo ad=new ActeurDispo();
+            ad.setActeur(p.getAct().getActeur_id());
+            ad.setNotavailabledate(notAvailable);
+            ad.setObservation(observation);
+
+
+            dao.save(p);
+            dao.save(pd);
+
+            dao.save(ad);
+        }
+
+    }
+
+    public void savePlanning(HibernateDAO dao,int[] act_id, Date[] date, Time[] debut){
+        List<Planning> plannings = buildPlanning(dao, act_id, date, debut);
+        savePlanning(dao,plannings);
+    }
+
+
+    private static boolean datePlanned(Date date, HibernateDAO dao){
+        List<Planning> plannings =(List) dao.findAll(new Planning());
+        for (Planning p :
+                plannings) {
+//            System.out.println(Date.valueOf(p.getPlanningdate().toLocalDateTime().toLocalDate())+" ; DDDDDDDDDD: "+date);
+            if(Date.valueOf(p.getPlanningdate().toLocalDateTime().toLocalDate()).equals(date))
+                return true;
+        }
+        return false;
     }
     @Override
     public String toString() {

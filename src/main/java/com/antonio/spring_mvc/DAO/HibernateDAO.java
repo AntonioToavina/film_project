@@ -113,7 +113,7 @@ public class HibernateDAO implements InterfaceDAO{
         this.session=null;
         List<Object> results=null;
 
-        String request = "SELECT * from v_act where scene_id in ("+scenes+") and act_id is null";
+        String request = "SELECT a.* from v_act a left join planning p on a.id = p.act_id where a.scene_id in ("+scenes+") and a.act_id is null and p.id is null";
 
         try{
             openConnection();

@@ -29,6 +29,11 @@ public class SuggestPlanning {
     public SuggestPlanning(Date date) {
         setDate(date);
     }
+    public SuggestPlanning(Date date,List<PlanningDetails> planningDetails) {
+        setDate(date);
+        setPlanningDetails(planningDetails);
+    }
+
 
     public SuggestPlanning() {
     }
@@ -135,11 +140,14 @@ public class SuggestPlanning {
 
 
             planning.setPlanningDetails(planningDetails1);
-
+            planningDetails1.sort(Comparator.comparing(PlanningDetails::getFirstHour));
             planningList.add(planning);
 
             
         }
+
+
+        planningList.sort(Comparator.comparing(SuggestPlanning::getDate));
 
         return planningList;
     }

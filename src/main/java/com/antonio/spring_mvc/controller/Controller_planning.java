@@ -1,10 +1,7 @@
 package com.antonio.spring_mvc.controller;
 
 import com.antonio.spring_mvc.DAO.HibernateDAO;
-import com.antonio.spring_mvc.model.Act;
-import com.antonio.spring_mvc.model.Film;
-import com.antonio.spring_mvc.model.Plateau;
-import com.antonio.spring_mvc.model.V_scenestatus;
+import com.antonio.spring_mvc.model.*;
 import com.antonio.spring_mvc.planning.SuggestPlanning;
 import com.antonio.spring_mvc.planning.TimingHour;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +56,18 @@ public class Controller_planning {
         List<SuggestPlanning> planning = suggestPlanning.suggestPlanning(getDao(),debut,fin,scenes);
         model.addAttribute("planning",planning);
         return "Pages/Planning/list";
+    }
+    @GetMapping
+    public String show_planning(@RequestParam(required = false) Date debut, @RequestParam(required = false) Date fin, Model model){
+
+
+        model.addAttribute("debut",debut);
+        model.addAttribute("fin",fin);
+
+        Planning p=new Planning();
+        List<SuggestPlanning> planning = p.getPlanning(getDao(),debut,fin);
+        model.addAttribute("planning",planning);
+        return "Pages/Planning/planning";
     }
 
     @PostMapping("/save")

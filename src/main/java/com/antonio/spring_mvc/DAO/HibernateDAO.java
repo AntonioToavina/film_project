@@ -2,6 +2,7 @@ package com.antonio.spring_mvc.DAO;
 
 import com.antonio.spring_mvc.Service.Utility;
 import com.antonio.spring_mvc.model.Act;
+import com.antonio.spring_mvc.model.Planning;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,6 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import javax.persistence.Query;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -118,6 +120,37 @@ public class HibernateDAO implements InterfaceDAO{
         try{
             openConnection();
             Query cr=this.session.createNativeQuery(request, Act.class);
+
+            results=cr.getResultList();
+        }catch(Exception e ){
+            e.printStackTrace();
+            if (this.transaction != null) {
+                this.transaction.rollback();
+            }
+        }finally{
+            closeSession();
+        }
+        return results;
+    }
+
+
+    public List<Object> getPlanning(Date date1, Date date2){
+        this.transaction = null;
+        this.session=null;
+        List<Object> results=null;
+
+        String condition="where 1=1";
+        if(date1!=null)
+            condition+=" and planningdate >='"+date1+"'";
+
+        if(date2!=null)
+            condition+=" and planningdate <='"+date2+"'";
+
+        String request = "SELECT * from planning "+condition;
+
+        try{
+            openConnection();
+            Query cr=this.session.createNativeQuery(request, Planning.class);
 
             results=cr.getResultList();
         }catch(Exception e ){

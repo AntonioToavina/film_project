@@ -47,6 +47,26 @@ INSERT INTO Plateaudispo VALUES (default,'2023-03-13','plateauA',1),
                                 (default,'2023-03-21','plateauC',3);
 
 
+-- cas radom : more random data
+-- INSERT INTO Plateaudispo 
+-- VALUES 
+--     (default, '2023-04-02', 'plateauA', 1),
+--     (default, '2023-04-10', 'plateauA', 1),
+--     (default, '2023-04-18', 'plateauA', 1),
+--     (default, '2023-04-26', 'plateauA', 1),
+--     (default, '2023-05-04', 'plateauA', 1),
+--     (default, '2023-04-04', 'plateauB', 2),
+--     (default, '2023-04-12', 'plateauB', 2),
+--     (default, '2023-04-20', 'plateauB', 2),
+--     (default, '2023-04-28', 'plateauB', 2),
+--     (default, '2023-05-06', 'plateauB', 2),
+--     (default, '2023-04-03', 'plateauC', 3),
+--     (default, '2023-04-11', 'plateauC', 3),
+--     (default, '2023-04-19', 'plateauC', 3),
+--     (default, '2023-04-27', 'plateauC', 3),
+--     (default, '2023-05-05', 'plateauC', 3);
+
+
 -- cas simple : si l'id de l'acteur est impaire , ces dates d'indisponibilités sont des dates impaires
 -- et si l'id et paire => dates d'indisponibilités sont paires
 INSERT INTO acteurdispo values(default,'2023-03-13','observationActeur1N1',1),

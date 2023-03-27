@@ -3,13 +3,24 @@ package com.antonio.spring_mvc.controller;
 import com.antonio.spring_mvc.DAO.HibernateDAO;
 import com.antonio.spring_mvc.Service.Acteur_Service;
 import com.antonio.spring_mvc.Service.Pagination;
+import com.antonio.spring_mvc.Service.PlaningService;
 import com.antonio.spring_mvc.Service.Scene_Service;
 import com.antonio.spring_mvc.model.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Date;
 import java.util.List;
 
@@ -83,6 +94,11 @@ public class Controller_Main {
     public String doUpdateStatus(@PathVariable  int idFilm,@PathVariable  int idScene,Model model){
         new Scene_Service().upgradeSceneStatus(dao,idScene);
         return "redirect: /scenes/"+idFilm;
+    }
+
+    @GetMapping("/generatePDF")
+    public void generatePDF(HttpServletResponse response) throws DocumentException, IOException {
+        new PlaningService().generatePlaning_PDF(response);
     }
 
 }

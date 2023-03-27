@@ -43,7 +43,7 @@
 
 
         <div class="row">
-            <div class="col-lg-12 mx-auto d-flex justify-content-center flex-column">
+            <div class="col-lg-8 mx-auto d-flex justify-content-center flex-column">
 
                 <c:forEach items="${planning}" var="list">
 
@@ -98,8 +98,85 @@
 
 
             </div>
+            <div class="col-lg-2">
 
 
+                <div class="card" style="margin: 20px">
+                    <h5 class="card-header">Acteurs</h5>
+                    <div class="card-body">
+
+
+                        <div class="table-responsive">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Acteur</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+
+                                <c:forEach items="${acteurs}" var="a">
+                                    <tr>
+                                        <td>${a.nom_acteur}</td>
+                                    </tr>
+                                </c:forEach>
+
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+            <div class="col-lg-2">
+
+
+
+                <div class="card" style="margin: 20px">
+                    <h5 class="card-header">Plateaux</h5>
+                    <div class="card-body">
+
+
+                        <div class="table-responsive">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Acteur</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+
+                                <c:forEach items="${plateaux}" var="p">
+                                    <tr>
+                                        <td>${p.location}</td>
+                                    </tr>
+                                </c:forEach>
+
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+        <div class="row">
             <div class="col-lg-12 mx-auto d-flex justify-content-center flex-column">
                 <button type="button" class="btn bg-gradient-info w-10">Générer PDF</button>
             </div>

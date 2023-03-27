@@ -2,7 +2,9 @@ package com.antonio.spring_mvc.DAO;
 
 import com.antonio.spring_mvc.Service.Utility;
 import com.antonio.spring_mvc.model.Act;
+import com.antonio.spring_mvc.model.Acteur;
 import com.antonio.spring_mvc.model.Planning;
+import com.antonio.spring_mvc.model.Plateau;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -151,6 +153,67 @@ public class HibernateDAO implements InterfaceDAO{
         try{
             openConnection();
             Query cr=this.session.createNativeQuery(request, Planning.class);
+
+            results=cr.getResultList();
+        }catch(Exception e ){
+            e.printStackTrace();
+            if (this.transaction != null) {
+                this.transaction.rollback();
+            }
+        }finally{
+            closeSession();
+        }
+        return results;
+    }
+
+
+    public List<Object> getActeurs(Date date1, Date date2){
+        this.transaction = null;
+        this.session=null;
+        List<Object> results=null;
+
+        String condition=" where 1=1";
+        if(date1!=null)
+            condition+=" and planningdate >='"+date1+"'";
+
+        if(date2!=null)
+            condition+=" and planningdate <='"+date2+"'";
+
+        String request = "SELECT a.* from Acteur a join (SELECT DISTINCT a.acteur_id FROM Planning p INNER JOIN Act a ON p.act_id = a.id "+condition+") p on a.id = p.acteur_id";
+
+        try{
+            openConnection();
+            Query cr=this.session.createNativeQuery(request, Acteur.class);
+
+            results=cr.getResultList();
+        }catch(Exception e ){
+            e.printStackTrace();
+            if (this.transaction != null) {
+                this.transaction.rollback();
+            }
+        }finally{
+            closeSession();
+        }
+        return results;
+    }
+
+    public List<Object> getPlateaux(Date date1, Date date2){
+        this.transaction = null;
+        this.session=null;
+        List<Object> results=null;
+
+        String condition=" where 1=1";
+        if(date1!=null)
+            condition+=" and planningdate >='"+date1+"'";
+
+        if(date2!=null)
+            condition+=" and planningdate <='"+date2+"'";
+
+        String request = "SELECT p.* from Plateau p join (SELECT DISTINCT s.plateau_id FROM Planning p INNER JOIN Act a ON p.act_id = a.id INNER JOIN Scene s ON a.scene_id = s.id"+condition+") pl on p.id = pl.plateau_id";
+
+        try{
+            openConnection();
+            Query cr=this.session.createNativeQuery(request, Plateau.class);
 
             results=cr.getResultList();
         }catch(Exception e ){

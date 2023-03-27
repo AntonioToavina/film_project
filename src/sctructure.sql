@@ -327,3 +327,5 @@ CREATE OR REPLACE VIEW v_act AS
 join Plateau P on S.plateau_id = P.id join Film F on S.film_id = F.id order by P.plateauctg_id,s.plateau_id,f.production_date;
 
 SELECT a.id,p.id from v_act a left join planning p on a.id = p.act_id where p.id is null;
+
+SELECT a.* from Acteur a join (SELECT DISTINCT a.acteur_id FROM Planning p INNER JOIN Act a ON p.act_id = a.id  where 1=1) p on a.id = p.acteur_id;

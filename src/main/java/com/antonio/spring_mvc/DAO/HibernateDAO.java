@@ -149,6 +149,7 @@ public class HibernateDAO implements InterfaceDAO{
             condition+=" and planningdate <='"+date2+"'";
 
         String request = "SELECT * from planning "+condition;
+        System.out.println(request);
 
         try{
             openConnection();

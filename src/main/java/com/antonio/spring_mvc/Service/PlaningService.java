@@ -1,5 +1,12 @@
 package com.antonio.spring_mvc.Service;
 
+import com.antonio.spring_mvc.model.Acteur;
+import com.antonio.spring_mvc.model.Auteur;
+import com.antonio.spring_mvc.model.Planning;
+import com.antonio.spring_mvc.model.Plateau;
+import com.antonio.spring_mvc.planning.PlanningDetails;
+import com.antonio.spring_mvc.planning.SuggestPlanning;
+import com.itextpdf.layout.element.Table;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -8,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 public class PlaningService {
 
@@ -19,75 +27,97 @@ public class PlaningService {
         document.add(paragraph);
     }
 
-    public void addPlaning_Table(Document document) throws DocumentException {
-        float column []= {60f,50f,50f};
-        PdfPTable table=  new PdfPTable(column);
-        table.setHorizontalAlignment(0);
-        table.setSpacingAfter(20);
-        PdfPCell cell_11=new PdfPCell(new Phrase("Item"));
-        table.addCell(cell_11);
+    public void addPlaning_Table(SuggestPlanning planning, PdfPTable table) throws DocumentException {
+        for(PlanningDetails planningDetails : planning.getPlanningDetails()){
+            table.addCell(planningDetails.getFirstHour().toString());
+            table.addCell(planningDetails.getLastHour().toString());
 
-        table.addCell("Qty");
-        table.addCell("Available");
+            table.addCell(planningDetails.getAct().getScene_id().getPlateau().getLocation());
 
-        table.addCell("Mango");
-        table.addCell("2 kg");
-        table.addCell("Yes");
+            table.addCell(planningDetails.getAct().getActtype_id().getTypename());
+            table.addCell(planningDetails.getAct().getAction());
+            table.addCell(planningDetails.getAct().getActeur_id().getNom_acteur());
 
-        table.addCell("Orange");
-        table.addCell("5 kg");
-        table.addCell("No");
-        document.add(table);
-
-        createList(document);
+            table.addCell(planningDetails.getAct().getEmotion_id().getEmotionname());
+            table.addCell(planningDetails.getAct().getScene_id().getDescription());
+            table.addCell(planningDetails.getAct().getScene_id().getFilm().getDescription());
+        }
     }
 
-    public void createList(Document document) throws DocumentException {
+
+    public void addAuteurs(List<Acteur> acteurs,Document document) throws DocumentException {
         Font font = new Font(Font.FontFamily.TIMES_ROMAN, 14,
                 Font.BOLD);
         addText(document,"Auteurs",font,0 ,false);
-        List list = new List(List.ORDERED);
-        list.add(new ListItem("First item"));
-        list.add(new ListItem("Second item"));
-        list.add(new ListItem("Third item"));
-
+        com.itextpdf.text.List list = new com.itextpdf.text.List(com.itextpdf.text.List.ORDERED);
+        for(Acteur acteur : acteurs){
+            list.add(new ListItem(acteur.getNom_acteur()));
+        }
         document.add(list);
     }
 
-    public void generatePlaning_PDF(HttpServletResponse response) throws DocumentException, IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Document document = new Document();
-        PdfWriter.getInstance(document, baos);
-        document.open();
-
-        Font font = new Font(Font.FontFamily.TIMES_ROMAN, 25,
+    public void addPlateaux( List<Plateau> plateaux,Document document) throws DocumentException {
+        Font font = new Font(Font.FontFamily.TIMES_ROMAN, 14,
                 Font.BOLD);
-        document.addTitle("Planing");
-
-        //Add title
-        addText(document,"Planing",font,1,true);
-
-        //Add subtitle
-        font = new Font(Font.FontFamily.TIMES_ROMAN, 11);
-        addText(document,"Date: 14/03/2023-15/03/2023",font,0,false);
-        addText(document,"Scenes: Scene1,scene2,scene3",font,0,true);
-
-        //Add content
-        font = new Font(Font.FontFamily.TIMES_ROMAN, 17,Font.UNDERLINE);
-        addText(document,"Mardi 14 Mars 2023",font,0,true);
-
-        addPlaning_Table(document);
-        document.close();
-
-        // Set the response headers
-        response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment; filename=hello.pdf");
-
-        // Send the PDF file to the client
-        OutputStream out = response.getOutputStream();
-        baos.writeTo(out);
-        out.flush();
-        out.close();
+        addText(document,"Plateaux",font,0 ,false);
+        com.itextpdf.text.List list = new com.itextpdf.text.List(com.itextpdf.text.List.ORDERED);
+        for(Plateau plateau : plateaux){
+            list.add(new ListItem(plateau.getLocation()));
+        }
+        document.add(list);
     }
 
+    public void generatePlaning_PDF(HttpServletResponse response,List<SuggestPlanning> planning,List<Acteur> acteurs, List<Plateau> plateaux) throws DocumentException, IOException {
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "attachment; filename=Planing.pdf");
+
+        OutputStream out = response.getOutputStream();
+        try{
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            Document document = new Document();
+            PdfWriter.getInstance(document, baos);
+            document.open();
+
+            Font font = new Font(Font.FontFamily.TIMES_ROMAN, 25,
+                    Font.BOLD);
+            document.addTitle("Planing");
+
+            //Add title
+            addText(document,"Planing",font,1,true);
+
+            //Add subtitle
+            font = new Font(Font.FontFamily.TIMES_ROMAN, 11);
+            addText(document,"Du : "+planning.get(0).getDate()+" au "+planning.get(planning.size()-1).getDate(),font,0,false);
+
+            //Add acteur
+            addAuteurs(acteurs,document);
+            addPlateaux(plateaux,document);
+
+            //Add content
+            for(SuggestPlanning plannings : planning){
+                font = new Font(Font.FontFamily.TIMES_ROMAN, 17,Font.UNDERLINE);
+                addText(document,plannings.getDate().toString(),font,0,true);
+
+
+                String[] headers={"Debut","Fin","Plateau","Categorie action","Action","Personnage","Emotion","Scene","Film"};
+                PdfPTable table=  new PdfPTable(9);
+                table.setWidthPercentage(100f);
+                table.setHorizontalAlignment(0);
+                table.setSpacingAfter(20);
+
+                for(int i=0;i<headers.length;i++)
+                    table.addCell(headers[i]);
+
+                addPlaning_Table(plannings,table);
+                document.add(table);
+            }
+            document.close();
+            baos.writeTo(out);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            out.flush();
+            out.close();
+        }
+    }
 }

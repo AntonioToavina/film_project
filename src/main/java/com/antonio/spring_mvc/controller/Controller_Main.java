@@ -96,9 +96,6 @@ public class Controller_Main {
         return "redirect: /scenes/"+idFilm;
     }
 
-    @GetMapping("/generatePDF")
-    public void generatePDF(HttpServletResponse response) throws DocumentException, IOException {
-        new PlaningService().generatePlaning_PDF(response);
-    }
+
 
 }

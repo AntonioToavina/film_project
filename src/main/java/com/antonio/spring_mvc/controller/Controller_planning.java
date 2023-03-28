@@ -1,9 +1,11 @@
 package com.antonio.spring_mvc.controller;
 
 import com.antonio.spring_mvc.DAO.HibernateDAO;
+import com.antonio.spring_mvc.Service.PlaningService;
 import com.antonio.spring_mvc.model.*;
 import com.antonio.spring_mvc.planning.SuggestPlanning;
 import com.antonio.spring_mvc.planning.TimingHour;
+import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -58,9 +62,7 @@ public class Controller_planning {
         return "Pages/Planning/list";
     }
     @GetMapping
-    public String show_planning(@RequestParam(required = false,defaultValue = "1000-01-01") Date debut, @RequestParam(required = false,defaultValue = "1000-01-01") Date fin, Model model){
-
-
+    public String show_planning(@RequestParam(required = false,defaultValue = "1000-01-01") Date debut, @RequestParam(required = false,defaultValue = "1000-01-01") Date fin, @RequestParam(required = false,defaultValue = "false")boolean generatePDF ,HttpServletResponse response, Model model) throws DocumentException, IOException {
         if (debut.equals(Date.valueOf("1000-01-01")))
             debut=null;
         if (fin.equals(Date.valueOf("1000-01-01")))
@@ -73,6 +75,9 @@ public class Controller_planning {
         List<SuggestPlanning> planning = p.getPlanning(getDao(),debut,fin);
         List<Acteur> acteurs = (List) getDao().getActeurs(debut,fin);
         List<Plateau> plateaux = (List) getDao().getPlateaux(debut,fin);
+
+        if(generatePDF)
+            new PlaningService().generatePlaning_PDF(response,planning,acteurs,plateaux);
         model.addAttribute("planning",planning);
         model.addAttribute("acteurs",acteurs);
         model.addAttribute("plateaux",plateaux);
@@ -100,4 +105,5 @@ public class Controller_planning {
 
         return "redirect:/index";
     }
+
 }

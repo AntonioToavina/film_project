@@ -178,12 +178,8 @@
         </div>
         <div class="row">
             <div class="col-lg-12 mx-auto d-flex justify-content-center flex-column">
-                <button type="button" class="btn bg-gradient-info w-10">Générer PDF</button>
+               <a href="/planning?generatePDF=true&&debut=${debut}&&fin=${fin}"><button type="button" class="btn bg-gradient-info w-10">Générer PDF</button></a>
             </div>
-
-
-
-
         </div>
     </div>
 

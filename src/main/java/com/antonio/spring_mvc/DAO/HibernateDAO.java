@@ -5,6 +5,7 @@ import com.antonio.spring_mvc.model.Act;
 import com.antonio.spring_mvc.model.Acteur;
 import com.antonio.spring_mvc.model.Planning;
 import com.antonio.spring_mvc.model.Plateau;
+import com.antonio.spring_mvc.model.Scene;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,6 +24,19 @@ public class HibernateDAO implements InterfaceDAO{
 
     private SessionFactory factory;
 
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
+    }
+
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public void setFactory(SessionFactory factory) {
+        this.factory = factory;
+    }
+
     public Transaction getTransaction() {
         return transaction;
     }
@@ -37,10 +51,6 @@ public class HibernateDAO implements InterfaceDAO{
 
     public void setSession(Session session) {
         this.session = session;
-    }
-
-    public void setFactory(SessionFactory factory) {
-        this.factory = factory;
     }
 
     public void generateFactory(){
@@ -89,6 +99,36 @@ public class HibernateDAO implements InterfaceDAO{
             array.add(iterator.next());
         }
         return array;
+    }
+
+    public List broadRequest(String query,Class c){
+        this.setTransaction(null);
+        this.setSession(null);
+
+        List results=null;
+
+        try{
+            this.openConnection();
+            Query dataQuery = null;
+            if(c!=null)
+                 dataQuery = this.getSession().createNativeQuery(query,c);
+
+            else
+                dataQuery = this.getSession().createNativeQuery(query);
+
+
+            results=dataQuery.getResultList();
+        }catch(Exception e ){
+            e.printStackTrace();
+            if (this.getTransaction() != null) {
+                this.getTransaction().rollback();
+            }
+        }finally{
+            this.closeSession();
+        }
+
+        return results;
+
     }
 
     @Override

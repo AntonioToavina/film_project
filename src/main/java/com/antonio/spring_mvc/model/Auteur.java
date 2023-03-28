@@ -36,4 +36,13 @@ public class Auteur {
     public Integer getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "Auteur{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                '}';
+    }
 }

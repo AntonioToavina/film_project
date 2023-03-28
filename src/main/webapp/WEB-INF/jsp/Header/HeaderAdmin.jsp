@@ -51,6 +51,9 @@
               <a href="/to_listesActeurs" class="dropdown-item border-radius-md">
                 <span>Acteurs</span>
               </a>
+              <a href="/films" class="dropdown-item border-radius-md">
+                <span>Films</span>
+              </a>
 
             </div>
           </div>
@@ -69,8 +72,20 @@
               <a href="/index" class="dropdown-item border-radius-md">
                 <span>Scene</span>
               </a>
+              <a href="/films/createFilm" class="dropdown-item border-radius-md">
+                <span>Film</span>
+              </a>
             </div>
           </div>
+        </li>
+        <li class="nav-item dropdown dropdown-hover mx-2 ms-lg-5">
+          <div class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" id="dropdownMenuPages4" >
+            <form action="/scenes/research" method="POST" >
+              <input type="text" name="keyword" placeholder="Elastic search on scene" />
+              <input type="submit" value="Rechercher" />
+            </form>
+          </div>
+
         </li>
       </ul>
     </div>

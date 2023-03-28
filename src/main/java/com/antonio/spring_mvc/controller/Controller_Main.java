@@ -86,12 +86,13 @@ public class Controller_Main {
     @GetMapping("/scenes/{idFilm}")
     public String listWithModification(Model model,@PathVariable int idFilm){
         model.addAttribute("allMatchScenes",new Scene_Service().findByFilmId(dao,idFilm));
+        model.addAttribute("allAuteurs",dao.findAll(new Auteur()));
         model.addAttribute("maxStatusId",new Scene_Service().findMaxId(dao));
         return "Pages/ListScenesModification";
     }
 
     @PostMapping("/scenes/updateStatus/{idFilm}/{idScene}")
-    public String doUpdateStatus(@PathVariable  int idFilm,@PathVariable  int idScene,Model model){
+    public String doUpdateStatus(@PathVariable  int idFilm,@PathVariable  int idScene){
         new Scene_Service().upgradeSceneStatus(dao,idScene);
         return "redirect: /scenes/"+idFilm;
     }

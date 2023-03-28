@@ -97,6 +97,7 @@ public class Scene {
                 ", plateau=" + plateau +
                 ", description='" + description + '\'' +
                 ", scenestatus=" + scenestatus +
+                ", auteur=" + auteur +
                 '}';
     }
 }

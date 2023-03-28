@@ -291,3 +291,14 @@ end status,case
 end value
 from
 v_scenestatus_tmp2 s join SceneStatus st on s.scenestatus_id = st.id;
+
+
+CREATE OR REPLACE VIEW V_SCENE_DETAILS AS
+select scene.*,
+       Film.title,
+       plateau.location,
+        auteur.nom
+from scene
+join Film on Scene.film_id = Film.id
+join Plateau on Scene.plateau_id = Plateau.id
+join auteur on auteur.id = Scene.auteur_id

@@ -27,7 +27,7 @@ public class SceneController {
     }
 
     @GetMapping
-    public String goToSearch(){
+    public String goToSearch(Model model){
         return "Pages/ResearchScene";
     }
 
@@ -35,7 +35,7 @@ public class SceneController {
     public void doSearch(Model model,String keyword){
         Research research = new Research();
         try {
-            research.setupSearch(dao,keyword);
+            model.addAttribute("correspondingScene",research.setupSearch(dao,keyword));
         } catch (Exception e) {
             e.printStackTrace();
         }

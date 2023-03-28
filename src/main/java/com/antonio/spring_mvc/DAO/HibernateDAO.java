@@ -41,16 +41,8 @@ public class HibernateDAO implements InterfaceDAO{
         return transaction;
     }
 
-    public void setTransaction(Transaction transaction) {
-        this.transaction = transaction;
-    }
-
     public Session getSession() {
         return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
     }
 
     public void generateFactory(){

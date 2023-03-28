@@ -12,7 +12,7 @@ public class Research {
     TableSearch[] tableSearch;
 
     public Research(){
-        tableSearch = new TableSearch[4];
+        tableSearch = new TableSearch[5];
         tableSearch[0] = new TableSearch("film","title","ilike");
         tableSearch[0].setEncapsulate(true);
 
@@ -24,6 +24,9 @@ public class Research {
 
         tableSearch[3] = new TableSearch("auteur","nom","ilike");
         tableSearch[3].setEncapsulate(true);
+
+        tableSearch[4] = new TableSearch("scenestatus","status","like");
+
     }
 
 

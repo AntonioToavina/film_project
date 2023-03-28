@@ -32,12 +32,14 @@ public class SceneController {
     }
 
     @PostMapping("/research")
-    public void doSearch(Model model,String keyword){
+    public String doSearch(Model model,String keyword){
         Research research = new Research();
         try {
-            model.addAttribute("correspondingScene",research.setupSearch(dao,keyword));
+            model.addAttribute("allMatchScenes",research.setupSearch(dao,keyword));
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return goToSearch(model);
     }
 }

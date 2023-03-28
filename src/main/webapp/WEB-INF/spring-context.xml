@@ -8,7 +8,8 @@
         <property name="driverClassName" value="org.postgresql.Driver" />
         <property name="url" value="jdbc:postgresql://localhost:5432/film_production1" />
         <property name="username" value="postgres" />
-        <property name="password" value="0000" />
+        <property name="password" value="indro" />
+
     </bean>
 
     <!-- Hibernate 5 Annotation SessionFactory Bean definition-->
@@ -33,4 +34,9 @@
     <bean id="ctlmain" class="com.antonio.spring_mvc.controller.Controller_Main">
         <property name="dao" ref="hibernateDAO" />
     </bean>
+
+    <bean id="sceneController" class="com.antonio.spring_mvc.controller.SceneController">
+        <property name="dao" ref="hibernateDAO" />
+    </bean>
+
 </beans>

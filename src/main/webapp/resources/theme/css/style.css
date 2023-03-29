@@ -23,6 +23,8 @@
 
 .slideout-body {
     padding: 10px;
+    overflow-y: auto;
+    max-height: 500px;
 }
 
 .scrollable-checkboxes {

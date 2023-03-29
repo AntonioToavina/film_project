@@ -51,6 +51,9 @@
               <a href="/to_listesActeurs" class="dropdown-item border-radius-md">
                 <span>Acteurs</span>
               </a>
+              <a href="/plateau" class="dropdown-item border-radius-md">
+                <span>Plateaux</span>
+              </a>
 
             </div>
           </div>
@@ -68,6 +71,12 @@
               </h6>
               <a href="/index" class="dropdown-item border-radius-md">
                 <span>Scene</span>
+              </a>
+              <a href="/action" class="dropdown-item border-radius-md">
+                <span>Action</span>
+              </a>
+              <a href="/invalid-plateau" class="dropdown-item border-radius-md">
+                <span>Date d'indisponibilité de plateau</span>
               </a>
             </div>
           </div>

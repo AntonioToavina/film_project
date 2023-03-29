@@ -43,6 +43,51 @@
                 </form>
             </div>
         </div>
+
+
+
+
+        <div id="slideout" class="slideout">
+            <div class="slideout-header">
+                <h5 class="slideout-title">Choisir Scènes</h5>
+                <button type="button" class="close-btn" onclick="closeSlideout()">X</button>
+            </div>
+            <div class="slideout-body">
+                <%--            <div class="form-group">--%>
+                <%--                <label for="search-scenes">Rechercher une scène:</label>--%>
+                <%--                <input type="text" class="form-control" id="search-scenes" placeholder="Entrez le nom de la scène...">--%>
+                <%--            </div>--%>
+                <div class="form-group">
+
+
+                    <div class="table-responsive">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><input onclick="handleCheckboxesClick(this)" type="checkbox"></th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Scène</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Film</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <c:forEach items="${scenes}" var="list">
+                                <tr>
+                                    <td><input type="checkbox" name="scene_id[]" value="${list.id}" aria-label="${list.scene.description}"></td>
+                                    <td>${list.scene.description}</td>
+                                    <td>${list.scene.film.title}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="valider-btn" class="btn bg-gradient-info" onclick="updateSelectedScenes(); closeSlideout();">Valider</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
@@ -92,50 +137,6 @@
 
 
 
-
-
-
-
-    <div id="slideout" class="slideout">
-        <div class="slideout-header">
-            <h5 class="slideout-title">Choisir Scènes</h5>
-            <button type="button" class="close-btn" onclick="closeSlideout()">X</button>
-        </div>
-        <div class="slideout-body">
-<%--            <div class="form-group">--%>
-<%--                <label for="search-scenes">Rechercher une scène:</label>--%>
-<%--                <input type="text" class="form-control" id="search-scenes" placeholder="Entrez le nom de la scène...">--%>
-<%--            </div>--%>
-            <div class="form-group">
-
-
-                <div class="table-responsive">
-                    <table class="table align-items-center mb-0">
-                        <thead>
-                        <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><input onclick="handleCheckboxesClick(this)" type="checkbox"></th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Scène</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Film</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        <c:forEach items="${scenes}" var="list">
-                            <tr>
-                                <td><input type="checkbox" name="scene_id[]" value="${list.id}" aria-label="${list.scene.description}"></td>
-                                <td>${list.scene.description}</td>
-                                <td>${list.scene.film.title}</td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="form-group">
-                <button type="button" id="valider-btn" class="btn bg-gradient-info" onclick="updateSelectedScenes(); closeSlideout();">Valider</button>
-            </div>
-        </div>
-    </div>
 
 
 

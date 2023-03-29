@@ -68,4 +68,14 @@ public class Acteur {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Acteur{" +
+                "id=" + id +
+                ", nom_acteur='" + nom_acteur + '\'' +
+                ", gender=" + gender +
+                ", birthday=" + birthday +
+                '}';
+    }
 }

@@ -329,3 +329,16 @@ join Plateau P on S.plateau_id = P.id join Film F on S.film_id = F.id order by P
 SELECT a.id,p.id from v_act a left join planning p on a.id = p.act_id where p.id is null;
 
 SELECT a.* from Acteur a join (SELECT DISTINCT a.acteur_id FROM Planning p INNER JOIN Act a ON p.act_id = a.id  where 1=1) p on a.id = p.acteur_id;
+
+
+CREATE OR REPLACE VIEW V_SCENE_DETAILS AS
+select scene.*,
+       Film.title,
+       plateau.location,
+       auteur.nom,
+       s.status
+from scene
+         join Film on Scene.film_id = Film.id
+         join Plateau on Scene.plateau_id = Plateau.id
+         join auteur on auteur.id = Scene.auteur_id
+         join scenestatus s on scene.scenestatus_id = s.id ;

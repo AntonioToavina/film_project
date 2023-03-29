@@ -48,6 +48,18 @@ public class Scene_Service {
         dao.update(scene);
     }
 
+    public void changeAuthor(HibernateDAO dao,int idAuthor,int idScene){
+        Scene scene = new Scene();
+        scene.setId(idScene);
+        scene = (Scene) dao.findById(scene);
+
+        Auteur auteur = new Auteur();
+        auteur.setId(idAuthor);
+        auteur = (Auteur) dao.findById(auteur);
+        scene.setAuteur(auteur);
+        dao.update(scene);
+    }
+
     public Object findMaxId(HibernateDAO dao) {
         try{
             dao.openConnection();
@@ -66,4 +78,6 @@ public class Scene_Service {
 
         return 0;
     }
+
+
 }

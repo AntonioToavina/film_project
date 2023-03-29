@@ -193,7 +193,7 @@ public class SuggestPlanning {
                     timingHourList.add(new TimingHour(pt.getFirstHour(),pt.getLastHour()));
                 }
 
-                planningDetailsList.addAll(pr);
+//                planningDetailsList.addAll(pr);
 
 
             }

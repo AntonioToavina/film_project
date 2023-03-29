@@ -108,7 +108,6 @@
 
             <div class="col-lg-12 mx-auto d-flex justify-content-center flex-column">
                 <button type="submit" class="btn bg-gradient-success w-100">Enregistrer</button>
-                <button type="reset" class="btn bg-gradient-warning w-100">annuler</button>
             </div>
 
 

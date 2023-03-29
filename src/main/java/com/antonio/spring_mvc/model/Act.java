@@ -145,14 +145,14 @@ public class Act {
 //        a.setAct_id(this);
         a.setScene_id(getScene_id());
         List<Act> related = (List) dao.find(a,true,0,0);
-        List<Act> result = new ArrayList<>();
-        result.addAll(related);
-        for (Act actR :
-                related) {
-            result.addAll(actR.getActRelated(dao));
-
-        }
-        return result;
+//        List<Act> result = new ArrayList<>();
+//        result.addAll(related);
+//        for (Act actR :
+//                related) {
+//            result.addAll(actR.getActRelated(dao));
+//
+//        }
+        return related;
 
     }
 

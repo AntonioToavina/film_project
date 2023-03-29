@@ -183,6 +183,8 @@ public class SuggestPlanning {
             List<Act> related = act.getActRelated(dao);
             List<TimingHour> timingHourList = timingHours;
             timingHourList.add(timing);
+
+            List<PlanningDetails> planningDetails1 = new ArrayList<>();
             for (Act a :
                     related) {
                 a.setFirsthour(act.getFirsthour());
@@ -193,13 +195,14 @@ public class SuggestPlanning {
                     timingHourList.add(new TimingHour(pt.getFirstHour(),pt.getLastHour()));
                 }
 
-//                planningDetailsList.addAll(pr);
+                planningDetails1.addAll(pr);
 
 
             }
+            System.out.println(act.getId()+" ; size: "+ planningDetails1.size()+" ; related: " +related.size());
 
 //            System.out.println("size1: "+planningDetailsList.size()+ " ; size2: "+related.size());
-            if(planningDetailsList.size()-1!=related.size())
+            if(planningDetails1.size()!=related.size())
                 return new ArrayList<>();
         }
 

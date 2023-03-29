@@ -3,6 +3,7 @@ package com.antonio.spring_mvc.model;
 import com.antonio.spring_mvc.DAO.HibernateDAO;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -140,6 +141,31 @@ public class Act {
     }
 
 
+    public boolean isAvailable(Date date,boolean checkScene, HibernateDAO dao){
+        ActeurDispo acteurDispo = new ActeurDispo();
+        PlateauDispo plateauDispo = new PlateauDispo();
+
+        if(checkScene){
+            Act a = new Act();
+            a.setScene_id(getScene_id());
+            List<Act> actsScene= (List) dao.find(a,true,0,0);
+            for (Act act :
+                    actsScene) {
+                if(!act.isAvailable(date,false,dao))
+                    return false;
+            }
+        }
+
+
+        if(getScene_id().getPlateau().isAvailable(date,dao))
+            return false;
+
+
+        if(getActeur_id().isAvailable(date,dao))
+            return false;
+
+        return true;
+    }
     public List<Act> getActRelated(HibernateDAO dao){
         Act a=new Act();
         a.setAct_id(this);

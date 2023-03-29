@@ -169,11 +169,7 @@ public class SuggestPlanning {
 
 
         }
-        if(!act.getScene_id().getPlateau().isAvailable(date,dao))
-            return planningDetailsList;
-
-
-        if(!act.getActeur_id().isAvailable(date,dao))
+        if(act.isAvailable(date,true,dao))
             return planningDetailsList;
 
 

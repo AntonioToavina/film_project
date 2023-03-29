@@ -142,17 +142,16 @@ public class Act {
 
     public List<Act> getActRelated(HibernateDAO dao){
         Act a=new Act();
-//        a.setAct_id(this);
-        a.setScene_id(getScene_id());
+        a.setAct_id(this);
         List<Act> related = (List) dao.find(a,true,0,0);
-//        List<Act> result = new ArrayList<>();
-//        result.addAll(related);
-//        for (Act actR :
-//                related) {
-//            result.addAll(actR.getActRelated(dao));
-//
-//        }
-        return related;
+        List<Act> result = new ArrayList<>();
+        result.addAll(related);
+        for (Act actR :
+                related) {
+            result.addAll(actR.getActRelated(dao));
+
+        }
+        return result;
 
     }
 
